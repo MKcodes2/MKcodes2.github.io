@@ -78,3 +78,13 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
 .outline-button:hover::after, .outline-button:focus-visible::after { opacity: 1; animation: ring-spin 3s linear infinite; }
 @keyframes ring-spin { to { --ring-angle: 360deg; } }
 @media (prefers-reduced-motion: reduce) { .outline-button:hover::after { animation: none; } }
+/* Navbar links: on hover the brand gradient slides over the word from left to right.
+   The background is twice as wide as the word: gradient on the left half, plain grey on the
+   right half. At rest we show the grey half; on hover we slide to the gradient half. */
+.nav-sweep {
+  background-image: linear-gradient(90deg, #a78bfa 0%, #8fa8ff 22%, #7cc8f5 44%, var(--color-muted) 56%, var(--color-muted) 100%);
+  background-size: 200% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transition: background-position 0.5s ease;
+}
+.nav-sweep:hover, .nav-sweep:focus-visible { background-position: 0 0; }

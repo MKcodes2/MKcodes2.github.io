@@ -14,7 +14,7 @@ const items: Item[] = [
   { label: 'Contact', section: 'contact' },
 ]
 
-const linkClass = 'text-sm text-muted hover:text-text transition-colors'
+const linkClass = 'nav-sweep text-sm'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
