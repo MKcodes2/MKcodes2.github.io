@@ -50,7 +50,7 @@ export default function Navbar() {
             Download CV ↓
           </a>
           <a href={`mailto:${contact.email}`}
-            className="rounded-full border border-line px-5 py-2.5 text-sm font-medium hover:border-lavender">
+            className="outline-button rounded-full px-5 py-2.5 text-sm font-medium">
             Let’s Talk ↗
           </a>
         </div>
@@ -72,7 +72,7 @@ export default function Navbar() {
             {items.map((i) => renderItem(i, () => setOpen(false)))}
             <div className="flex gap-3 pt-2">
               <a href={contact.cv} download className="brand-button rounded-full px-4 py-2 text-sm text-white">Download CV ↓</a>
-              <a href={`mailto:${contact.email}`} className="rounded-full border border-line px-4 py-2 text-sm">Let’s Talk ↗</a>
+              <a href={`mailto:${contact.email}`} className="outline-button rounded-full px-4 py-2 text-sm">Let’s Talk ↗</a>
             </div>
           </motion.nav>
         )}

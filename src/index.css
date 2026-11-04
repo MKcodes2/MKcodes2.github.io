@@ -59,3 +59,22 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent), linear-gradient(to bottom, black 85%, transparent);
   mask-composite: intersect;
 }
+/* Outlined buttons (Let's Talk, About me): a clearly visible 1.5px ring that turns into the
+   brand gradient on hover and slowly travels around the button. The ring is drawn with
+   pseudo-elements so the inside stays see-through. */
+@property --ring-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.outline-button { position: relative; isolation: isolate; }
+.outline-button::before,
+.outline-button::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.outline-button::before { background: rgba(255, 255, 255, 0.3); }
+.outline-button::after {
+  background: conic-gradient(from var(--ring-angle), #a78bfa, #8fa8ff, #7cc8f5, #8fa8ff, #a78bfa);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.outline-button:hover::after, .outline-button:focus-visible::after { opacity: 1; animation: ring-spin 3s linear infinite; }
+@keyframes ring-spin { to { --ring-angle: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .outline-button:hover::after { animation: none; } }

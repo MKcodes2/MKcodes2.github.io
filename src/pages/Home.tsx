@@ -77,7 +77,7 @@ export default function Home() {
             View my Work ↗
           </button>
           <button type="button" onClick={() => goTo('about')}
-            className="rounded-full border border-line px-6 py-3.5 font-semibold hover:border-lavender transition-colors">
+            className="outline-button rounded-full px-6 py-3.5 font-semibold">
             About me
           </button>
         </div>
