@@ -25,7 +25,7 @@ export interface DetailPage {
 }
 
 export const contact = {
-  email: 'marikate.evan@gmail.com',
+  email: 'marykate.evan@gmail.com',
   linkedin: 'https://www.linkedin.com/in/mary-kate-evangelidou-881518393/',
   github: 'https://github.com/MKcodes2',
   cv: '/cv.pdf', // put the CV file at public/cv.pdf
@@ -35,7 +35,7 @@ export const profile = {
   name: 'Mary Kate Evangelidou',
   short: 'MK',
   role: 'Molecular Biologist · Software Developer',
-  slogan: 'Designing systems, from science to software',
+  slogan: 'Designing systems, across science and software',
   intro:
     'I’m Mary Kate, or just MK, a molecular biologist and software developer. I love neuroscience, developmental and behavioural biology, and I’d like to bring coding into that research.',
     // 'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
@@ -45,27 +45,27 @@ export const worlds: Record<World, { label: string; path: string; period: string
   biology: {
     label: 'Molecular Biology & Genetics',
     path: '/biology',
-    period: 'BSc · 2018 – 2023',
-    blurb: 'TODO: two lines on your biology journey, from the bench to gene regulatory networks.',
+    period: 'BSc DUTH · 2018 – 2023',
+    blurb: 'Research on gene regulatory netowrks, lab techniques, and many scientific presentations',
   },
   coding: {
     label: 'Software Engineering',
     path: '/coding',
     period: '42 Heilbronn · 2023 – 2026',
-    blurb: 'TODO: two lines on the 42 journey and what you built there.',
+    blurb: 'From low-level C and C++ to full-stack web development and UX/UI Design. My graduation project is where code and design finally clicked.',
   },
 }
 
 // About section on the home page: newest first, like the reference timeline.
 export const timeline: { dates: string; title: string; text: string; tag: string }[] = [
   {
-    dates: 'Mar 2023 — Jan 2026',
+    dates: 'Mar 2023 — Sep 2026',
     title: '42 Heilbronn · Software Engineering',
     text: 'Scholarship programme in software engineering: C, C++, Python, Docker and full-stack web. My graduation project was PongJam, a realtime multiplayer web platform where I designed and built the frontend.',
     tag: 'Software engineering',
   },
   {
-    dates: '2018 — 2023',
+    dates: 'Sep 2018 — Jul 2023',
     title: 'Democritus University of Thrace · BSc Molecular Biology & Genetics',
     text: 'Graduated with Distinction (9.22/10, top 3 of my class). Thesis at BRFAA in Athens on gene regulatory networks in breast cancer cells, graded 10/10.',
     tag: 'Molecular biology',

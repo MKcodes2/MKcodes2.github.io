@@ -69,10 +69,12 @@ export default function Home() {
       <div className="grid gap-x-12 lg:grid-cols-[1.3fr_1fr]">
         <p className="label lg:col-start-1">{profile.role}</p>
         <div className="mt-6 lg:col-start-1 lg:row-start-2">
-          {/* One continuous gradient over "science to software": white into purple (biology),
-              shifting at "to", into blue-cyan (code) on "software". */}
+          {/* One continuous gradient over "science and software": white into purple (biology),
+              shifting at "and", into blue-cyan (code) on "software". The visible text is written
+              here (not taken from content.ts) because the gradient needs its own <span>;
+              profile.slogan is still used for screen readers via aria-label. */}
           <h1 aria-label={profile.slogan} className="text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
-            Designing systems, from <span className="worlds-gradient">science to software</span>
+            Designing systems, across <span className="worlds-gradient">science and software</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">{profile.intro}</p>
         </div>
