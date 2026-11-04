@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [pathname, state])
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col overflow-x-clip">
       <Starfield />
       <Navbar />
       <main className="flex-1 mx-auto w-full max-w-7xl px-4 sm:px-8">{children}</main>

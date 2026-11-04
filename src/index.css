@@ -52,3 +52,10 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-box-decoration-break: slice; box-decoration-break: slice;
 }
+/* Hero portrait: soften the hard edges of the desk on the sides and bottom. */
+.portrait-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent), linear-gradient(to bottom, black 85%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent), linear-gradient(to bottom, black 85%, transparent);
+  mask-composite: intersect;
+}

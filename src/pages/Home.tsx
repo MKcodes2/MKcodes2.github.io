@@ -6,6 +6,7 @@ import GlowDivider from '../components/GlowDivider'
 import Page from '../components/Page'
 import { honours, leadership, profile, timeline, worlds } from '../content'
 import { useSectionNav } from '../components/useSectionNav'
+import HeroPortrait from '../components/HeroPortrait'
 
 // Fades a block in as it scrolls into view.
 function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
@@ -56,35 +57,39 @@ export default function Home() {
   return (
     <Page>
       {/* ---------- Hero ---------- */}
-      <section className="grid items-center gap-12 pt-24 lg:grid-cols-[1.3fr_1fr]">
-        <div>
-          <p className="label">{profile.role}</p>
+      {/* The hero fills exactly one screen (minus the navbar), so the next section always
+          starts below the fold, at any zoom level. On large screens the portrait spans
+          from the role label down to the buttons. */}
+      <section className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center pt-10 pb-24">
+      <div className="grid gap-x-12 lg:grid-cols-[1.3fr_1fr]">
+        <p className="label lg:col-start-1">{profile.role}</p>
+        <div className="mt-6 lg:col-start-1 lg:row-start-2">
           {/* One continuous gradient over "science to software": white into purple (biology),
               shifting at "to", into blue-cyan (code) on "software". */}
-          <h1 aria-label={profile.slogan} className="mt-6 text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
+          <h1 aria-label={profile.slogan} className="text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
             Designing systems, from <span className="worlds-gradient">science to software</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">{profile.intro}</p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button type="button" onClick={() => goTo('worlds')}
-              className="rounded-full bg-white px-6 py-3.5 font-semibold text-bg hover:bg-lavender transition-colors">
-              View my Work ↗
-            </button>
-            <button type="button" onClick={() => goTo('about')}
-              className="rounded-full border border-line px-6 py-3.5 font-semibold hover:border-lavender transition-colors">
-              About me
-            </button>
-          </div>
         </div>
-        {/* Placeholder until the cartoon photo is ready. */}
-        <div className="mx-auto aspect-[4/5] w-full max-w-sm rounded-[2rem] border border-dashed border-lavender/40 bg-white/[0.02] flex items-center justify-center">
-          <span className="label">Photo coming soon</span>
+        <div className="mt-10 flex flex-wrap gap-4 lg:col-start-1 lg:row-start-3">
+          <button type="button" onClick={() => goTo('worlds')}
+            className="rounded-full bg-white px-6 py-3.5 font-semibold text-bg hover:bg-lavender transition-colors">
+            View my Work ↗
+          </button>
+          <button type="button" onClick={() => goTo('about')}
+            className="rounded-full border border-line px-6 py-3.5 font-semibold hover:border-lavender transition-colors">
+            About me
+          </button>
         </div>
+        <div className="relative mt-12 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:mt-0">
+          <HeroPortrait />
+        </div>
+      </div>
+        <p className="label absolute inset-x-0 bottom-6 text-center !text-[0.65rem]">Scroll to explore</p>
       </section>
 
       {/* ---------- Two worlds ---------- */}
-      <Divider />
-      <section id="worlds">
+      <section id="worlds" className="pt-24">
         <Reveal><SectionHeader label="My work" title="Two worlds, one curiosity." /></Reveal>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {(['biology', 'coding'] as const).map((w, i) => (
