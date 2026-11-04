@@ -27,7 +27,7 @@ function SectionHeader({ label, title, aside }: { label: string; title: string; 
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <p className="label">{label}</p>
+        <p className="label !text-base">{label}</p>
         <h2 className="mt-10 text-4xl sm:text-6xl font-bold leading-none tracking-[-0.04em]">{title}</h2>
       </div>
       {aside && <p className="max-w-md text-muted">{aside}</p>}
