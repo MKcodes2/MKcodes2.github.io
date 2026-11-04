@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Palette inspired by Mary Kate's reference: near-black to deep purple, soft lavender and cyan accents. */
+@theme {
+  --color-bg: #08080c;
+  --color-surface: rgb(255 255 255 / 0.03);
+  --color-line: rgb(255 255 255 / 0.1);
+  --color-text: #f2f1f7;
+  --color-muted: #a3a1b5;
+  --color-lavender: #c9b8ff;
+  --color-violet: #7c6cf2;
+  --color-cyan: #8fdcef;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html { background: var(--color-bg); color: var(--color-text); }
+body { margin: 0; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+/* Big headline gradient: white fading into soft lavender and cyan. */
+/* Brand gradient: purple into periwinkle blue and cyan. */
+:root {
+  --brand-gradient: linear-gradient(90deg, #b39dff 0%, #a78bfa 25%, #8fa8ff 55%, #7cc8f5 85%);
+  /* Same hues, a little deeper, so white text on buttons stays readable. */
+  --brand-gradient-deep: linear-gradient(90deg, #9479f7 0%, #7f8ef6 55%, #5ea9e6 100%);
+}
+
+/* Big headline: white at the top, fading into the brand gradient on the last lines (left purple, right blue). */
+.headline-gradient {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #ffffff 42%, rgba(255, 255, 255, 0.55) 62%, rgba(255, 255, 255, 0) 80%),
+    linear-gradient(90deg, #c4b2ff 0%, #a78bfa 22%, #8fa8ff 48%, #7cc8f5 72%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.brand-button { background: var(--brand-gradient-deep); }
+.label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--color-muted); }
+
+@keyframes glow {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+/* Sections reached from the navbar stop below the sticky bar. */
+section[id], footer[id] { scroll-margin-top: 6rem; }
