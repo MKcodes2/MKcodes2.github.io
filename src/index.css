@@ -45,3 +45,10 @@ body { margin: 0; font-family: var(--font-sans); -webkit-font-smoothing: antiali
 }
 /* Sections reached from the navbar stop below the sticky bar. */
 section[id], footer[id] { scroll-margin-top: 6rem; }
+/* The two worlds in the slogan. The span wraps over two lines; "slice" makes the gradient
+   run continuously across both lines, as if they were one long line. */
+.worlds-gradient {
+  background: linear-gradient(90deg, #f5f2ff 0%, #c9b6ff 16%, #a78bfa 32%, #9d8ffa 44%, #8fa8ff 58%, #84c0f6 78%, #7cd3f2 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-box-decoration-break: slice; box-decoration-break: slice;
+}

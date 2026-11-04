@@ -37,7 +37,8 @@ export const profile = {
   role: 'Molecular Biologist · Software Developer',
   slogan: 'Designing systems, from science to software',
   intro:
-    'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
+    'I’m Mary Kate, or just MK, a molecular biologist and software developer. I love neuroscience, developmental and behavioural biology, and I’d like to bring coding into that research.',
+    // 'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
 }
 
 export const worlds: Record<World, { label: string; path: string; period: string; blurb: string }> = {

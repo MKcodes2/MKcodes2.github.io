@@ -1,6 +1,19 @@
 import { useEffect, useRef } from 'react'
 
-// Animated background: a dark gradient with slowly drifting purple dots, drawn on a canvas.
+// Animated background drawn on a canvas: a near-black sky with tiny drifting "stars".
+// MODE 'letters': the stars are DNA bases (A T C G, purple = biology) and bits (0 1, cyan = software).
+// MODE 'dots': plain purple dots. Switch here to compare.
+const MODE: 'letters' | 'dots' = 'letters'
+
+// Letter sizes in px: most letters are near MIN_SIZE (far away), a few reach MAX_SIZE (close).
+const MIN_SIZE = 6
+const MAX_SIZE = 11
+
+const BIO = { chars: ['A', 'T', 'C', 'G'], rgb: '167, 139, 250' } // purple
+const CODE = { chars: ['0', '1'], rgb: '124, 200, 245' } // cyan
+
+type Star = { x: number; y: number; vx: number; vy: number; a: number; tw: number; depth: number; char: string; rgb: string; bright: boolean }
+
 export default function Starfield() {
   const ref = useRef<HTMLCanvasElement>(null)
 
@@ -14,7 +27,7 @@ export default function Starfield() {
     let w = 0
     let h = 0
     let frame = 0
-    let dots: { x: number; y: number; r: number; vx: number; vy: number; a: number; tw: number }[] = []
+    let stars: Star[] = []
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -23,35 +36,48 @@ export default function Starfield() {
       canvas.width = w * dpr
       canvas.height = h * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      const count = Math.round((w * h) / 2500) // denser on bigger screens
-      // Every dot drifts to the right, like a gentle wind. Speeds vary a lot,
-      // and closer (bigger, brighter) dots move faster, which gives a sense of depth.
-      dots = Array.from({ length: count }, () => {
-        const depth = Math.random() ** 3 // most dots small and far away, a few close
-        const bright = Math.random() < 0.03 // a few highlighted dots
+      // Letters take more room than dots, so there are fewer of them.
+      const count = Math.round((w * h) / (MODE === 'letters' ? 5000 : 2500))
+      // Everything drifts to the right, like a gentle wind. Closer stars are bigger,
+      // brighter and faster, which gives a sense of depth.
+      stars = Array.from({ length: count }, () => {
+        const depth = Math.random() ** 3 // most far away, a few close
+        const bright = Math.random() < 0.03
+        const set = Math.random() < 0.5 ? BIO : CODE
         return {
           x: Math.random() * w,
           y: Math.random() * h,
-          r: bright ? 1.8 + Math.random() * 0.8 : 0.3 + depth * 1.1,
           vx: 0.05 + depth * 0.55 + (bright ? 0.4 : 0),
           vy: (Math.random() - 0.5) * 0.05,
-          a: bright ? 0.9 : 0.15 + depth * 0.45,
+          a: bright ? 0.8 : 0.12 + depth * 0.4,
           tw: Math.random() * Math.PI * 2,
+          depth,
+          char: set.chars[Math.floor(Math.random() * set.chars.length)],
+          rgb: MODE === 'letters' ? set.rgb : '130, 118, 235',
+          bright,
         }
       })
     }
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h)
-      for (const d of dots) {
-        d.x = (d.x + d.vx + w) % w
-        d.y = (d.y + d.vy + h) % h
-        d.tw += 0.01
-        const alpha = d.a * (0.6 + 0.4 * Math.sin(d.tw))
-        ctx.beginPath()
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(130, 118, 235, ${alpha})`
-        ctx.fill()
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      for (const s of stars) {
+        s.x = (s.x + s.vx + w) % w
+        s.y = (s.y + s.vy + h) % h
+        s.tw += 0.01
+        const alpha = s.a * (0.6 + 0.4 * Math.sin(s.tw))
+        ctx.fillStyle = `rgba(${s.rgb}, ${alpha})`
+        if (MODE === 'letters') {
+          const size = s.bright ? MAX_SIZE + 1 : MIN_SIZE + s.depth * (MAX_SIZE - MIN_SIZE)
+          ctx.font = `500 ${size.toFixed(1)}px "JetBrains Mono", ui-monospace, monospace`
+          ctx.fillText(s.char, s.x, s.y)
+        } else {
+          ctx.beginPath()
+          ctx.arc(s.x, s.y, s.bright ? 1.8 + s.depth : 0.3 + s.depth * 1.1, 0, Math.PI * 2)
+          ctx.fill()
+        }
       }
       if (!reduce) frame = requestAnimationFrame(draw)
     }

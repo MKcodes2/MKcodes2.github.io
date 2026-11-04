@@ -59,8 +59,10 @@ export default function Home() {
       <section className="grid items-center gap-12 pt-24 lg:grid-cols-[1.3fr_1fr]">
         <div>
           <p className="label">{profile.role}</p>
-          <h1 className="headline-gradient mt-6 text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em]">
-            {profile.slogan}
+          {/* One continuous gradient over "science to software": white into purple (biology),
+              shifting at "to", into blue-cyan (code) on "software". */}
+          <h1 aria-label={profile.slogan} className="mt-6 text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
+            Designing systems, from <span className="worlds-gradient">science to software</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">{profile.intro}</p>
           <div className="mt-10 flex flex-wrap gap-4">
@@ -87,7 +89,7 @@ export default function Home() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {(['biology', 'coding'] as const).map((w, i) => (
             <Reveal key={w} delay={i * 0.1}>
-              <Card to={worlds[w].path} eyebrow={worlds[w].period} title={worlds[w].label} text={worlds[w].blurb} large />
+              <Card to={worlds[w].path} eyebrow={worlds[w].period} title={worlds[w].label} text={worlds[w].blurb} large accent={w} />
             </Reveal>
           ))}
         </div>
