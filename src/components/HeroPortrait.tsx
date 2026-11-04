@@ -41,7 +41,8 @@ export default function HeroPortrait() {
         transition={{ duration: FADE_S, ease: 'easeInOut' }}
       />
       {/* Fade the desk's left, right and bottom edges so it melts into the page. */}
-      <div className="portrait-fade absolute inset-0">
+      {/* brightness(0.85) tones the sketches down slightly; 1 = original strength. */}
+      <div className="portrait-fade absolute inset-0 brightness-[0.85]">
         <AnimatePresence initial={false}>
           <motion.img
             key={mode.src}

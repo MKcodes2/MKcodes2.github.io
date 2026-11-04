@@ -88,3 +88,11 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   transition: background-position 0.5s ease;
 }
 .nav-sweep:hover, .nav-sweep:focus-visible { background-position: 0 0; }
+/* Name in the navbar: a soft brand-gradient glow appears behind the white letters on hover. */
+.name-glow { position: relative; isolation: isolate; }
+.name-glow::before {
+  content: ""; position: absolute; inset: -6px -14px; z-index: -1; border-radius: 9999px; pointer-events: none;
+  background: linear-gradient(90deg, #a78bfa, #8fa8ff, #7cc8f5);
+  filter: blur(16px); opacity: 0; transition: opacity 0.35s ease;
+}
+.name-glow:hover::before, .name-glow:focus-visible::before { opacity: 0.55; }

@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { contact, profile } from '../content'
 import { useSectionNav } from './useSectionNav'
 
@@ -19,6 +19,14 @@ const linkClass = 'nav-sweep text-sm'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const goTo = useSectionNav()
+  const { pathname } = useLocation()
+
+  // Clicking the name always brings you back to the top of the home page. If we're already
+  // on the home page, the router has nowhere new to go, so we scroll up ourselves.
+  const goHome = () => {
+    setOpen(false)
+    if (pathname === '/') window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   const renderItem = (item: Item, onClick?: () => void) =>
     item.to ? (
@@ -38,7 +46,7 @@ export default function Navbar() {
       {/* Edge padding in vw keeps the name and buttons at the same distance from the screen edges,
           even when zooming. The 1fr | auto | 1fr grid keeps the links centred between them. */}
       <div className="grid h-16 grid-cols-[1fr_auto] xl:grid-cols-[1fr_auto_1fr] items-center gap-6 px-[3vw]">
-        <Link to="/" className="justify-self-start whitespace-nowrap font-bold tracking-tight text-lg">
+        <Link to="/" onClick={goHome} className="name-glow justify-self-start whitespace-nowrap font-bold tracking-tight text-lg">
           {profile.name}
         </Link>
 

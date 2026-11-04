@@ -7,6 +7,11 @@ import Page from '../components/Page'
 import { honours, leadership, profile, timeline, worlds } from '../content'
 import { useSectionNav } from '../components/useSectionNav'
 import HeroPortrait from '../components/HeroPortrait'
+import dnaArt from '../assets/worlds/dna.webp'
+import computerArt from '../assets/worlds/computer.webp'
+
+// Illustration shown inside each world card.
+const worldArt = { biology: dnaArt, coding: computerArt }
 
 // Fades a block in as it scrolls into view.
 function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
@@ -94,10 +99,19 @@ export default function Home() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {(['biology', 'coding'] as const).map((w, i) => (
             <Reveal key={w} delay={i * 0.1}>
-              <Card to={worlds[w].path} eyebrow={worlds[w].period} title={worlds[w].label} text={worlds[w].blurb} large accent={w} />
+              <Card to={worlds[w].path} eyebrow={worlds[w].period} title={worlds[w].label} text={worlds[w].blurb} large accent={w} image={worldArt[w]} />
             </Reveal>
           ))}
         </div>
+        {/* The bridge between the two worlds: biology words in purple, computing words in cyan.
+            The two equivalents (proteins = software) are highlighted so the analogy reads at a glance. */}
+        <Reveal delay={0.2}>
+          <p className="mx-auto mt-14 max-w-2xl text-center text-lg sm:text-xl leading-relaxed text-muted">
+            <span className="rounded-md bg-[#a78bfa]/15 px-1.5 font-semibold text-[#c4b1ff]">Proteins</span> are to the <span className="text-[#a78bfa]">body</span> what{' '}
+            <span className="rounded-md bg-[#7cc8f5]/15 px-1.5 font-semibold text-[#a6dcfa]">software</span> is to <span className="text-[#7cc8f5]">hardware</span>.
+            <br className="hidden sm:block" /> I like working at that level, in both worlds.
+          </p>
+        </Reveal>
       </section>
 
       {/* ---------- About: timeline ---------- */}
