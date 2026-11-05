@@ -15,14 +15,13 @@ const FADE_S = 1.6;   // length of the crossfade
 
 export default function HeroPortrait() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (paused || reduceMotion) return;
+    if (reduceMotion) return; // keeps switching on its own, hover or not
     const id = window.setInterval(() => setIndex((i) => (i + 1) % MODES.length), HOLD_MS);
     return () => window.clearInterval(id);
-  }, [paused, reduceMotion]);
+  }, [reduceMotion]);
 
   const mode = MODES[index];
 
@@ -30,8 +29,6 @@ export default function HeroPortrait() {
     // Phones: full width. Large screens: as tall as the hero text block, width follows the image shape.
     <div
       className="relative mx-auto aspect-[696/694] w-full max-w-md lg:absolute lg:inset-y-0 lg:-right-8 xl:-right-16 lg:w-auto lg:max-w-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       {/* Soft glow behind her, purple in the lab and cyan at the laptop. */}
       <motion.div
