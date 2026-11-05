@@ -49,7 +49,13 @@ function CodingIntro() {
       <h2 className="mt-16 text-xl font-semibold">{codingHub.certificate.heading}</h2>
       <div className="mt-6 grid gap-8 lg:grid-cols-2">
         <figure>
-          <img src={certificateImg} alt="42 certificate of completion: Curriculum of Architect in Digital Technologies" loading="lazy" className="w-full rounded-2xl border border-[#7cc8f5]/30" />
+          {/* Opens the official PDF in a new tab, like the GitHub and LinkedIn links. */}
+          <a href={codingHub.certificate.pdf} target="_blank" rel="noreferrer" className="group/cert relative block overflow-hidden rounded-2xl border border-[#7cc8f5]/30 transition-all duration-300 hover:border-[#7cc8f5]/80 hover:shadow-[0_0_40px_-6px_rgba(124,200,245,0.55)]">
+            <img src={certificateImg} alt="42 certificate of completion: Curriculum of Architect in Digital Technologies" loading="lazy" className="w-full transition-transform duration-500 group-hover/cert:scale-[1.02]" />
+            <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1.5 text-sm text-[#7cc8f5] opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover/cert:opacity-100 group-focus-visible/cert:opacity-100">
+              Open the official certificate ↗
+            </span>
+          </a>
           <figcaption className="mt-4 text-muted leading-relaxed">
             {codingHub.certificate.text}
             {codingHub.certificate.link && (

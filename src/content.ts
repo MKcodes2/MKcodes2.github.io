@@ -119,6 +119,7 @@ export const codingHub = {
   certificate: {
     heading: 'Core curriculum, completed',
     text: 'In September 2026 I completed the core curriculum and received 42’s certificate “Curriculum of Architect in Digital Technologies”, at Junior Developer level.',
+    pdf: 'https://drive.google.com/file/d/1BWljwkQD3v05ia4kNPe_8_6_ULGgZ3iH/view', // official certificate (PDF on Google Drive), opens in a new tab
     link: '', // TODO: the Credly badge URL
   },
   holyGraph: 'The Holy Graph is 42’s map of the core curriculum. Every project I completed is lit up in blue.',
