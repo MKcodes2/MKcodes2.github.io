@@ -67,14 +67,14 @@ type TimelineSub = { dates: string; title: string; text: string; logo?: Timeline
 export const timeline: { dates: string; title: string; text: string; tag: string; logo?: TimelineLogo; sub?: TimelineSub[] }[] = [
   {
     dates: 'Mar 2023 — Sep 2026',
-    title: '42 Heilbronn · Software Engineering',
+    title: 'Software Engineering · 42 Heilbronn',
     text: 'Scholarship programme in software engineering: C, C++, Python, Docker and full-stack web. My graduation project was PongJam, a realtime multiplayer web platform where I designed and built the frontend.',
     tag: 'Software engineering',
     logo: '42',
   },
   {
     dates: 'Sep 2018 — Jul 2023',
-    title: 'Democritus University of Thrace · BSc Molecular Biology & Genetics',
+    title: 'BSc Molecular Biology & Genetics · Democritus University of Thrace',
     text: 'Graduated with Distinction (9.22/10, top 3 of my class), supported by an NSRF scholarship. Thesis on gene regulatory networks in breast cancer cells, graded 10/10.',
     tag: 'Molecular biology',
     logo: 'duth',
@@ -83,7 +83,7 @@ export const timeline: { dates: string; title: string; text: string; tag: string
         dates: 'Mar 2022 — Feb 2023',
         title: 'Research intern · Biomedical Research Foundation of the Academy of Athens',
         logo: 'brfaa',
-        text: 'Thesis research: Prox1 overexpression in breast cancer cell lines (MCF7, MDA-MB-231) using adenoviral vectors, analysed with RT-qPCR.',
+        text: 'Thesis research: Prox1 overexpression in breast cancer cell lines (MCF7, MDA-MB-231) using adenoviral vectors, analysed with qPCR.',
       },
       {
         dates: 'Feb 2020 — Dec 2021',
@@ -120,7 +120,7 @@ export const biologyHub = {
     'Thesis graded 10 / 10',
   ],
   intro: ['TODO: a short paragraph on the degree and what drew you to molecular biology.'],
-  techniques: ['Cell culture', 'PCR / RT-qPCR', 'DNA cloning', 'Adenoviral overexpression', 'Gel electrophoresis'],
+  techniques: ['Cell culture', 'PCR / qPCR', 'DNA cloning', 'Adenoviral overexpression', 'Gel electrophoresis'],
   labAssistant: 'Lab assistant, DUTh, Feb 2020 – Dec 2021. TODO: one or two lines on what you did.',
   teaching: {
     heading: 'Teaching Certification',
@@ -168,7 +168,7 @@ export const pages: DetailPage[] = [
     slug: 'thesis',
     world: 'biology',
     title: 'Gene regulatory networks in cancer cells',
-    summary: 'BSc thesis at BRFAA: Prox1 overexpression in breast cancer cell lines, measured with RT-qPCR.',
+    summary: 'BSc thesis at BRFAA: Prox1 overexpression in breast cancer cell lines, measured with qPCR.',
     meta: ['BRFAA, Athens', 'Mar 2022 – Feb 2023', 'Grade 10 / 10'],
     featured: true,
     sections: [
