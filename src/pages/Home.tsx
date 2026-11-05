@@ -9,6 +9,18 @@ import { useSectionNav } from '../components/useSectionNav'
 import HeroPortrait from '../components/HeroPortrait'
 import dnaArt from '../assets/worlds/dna.webp'
 import computerArt from '../assets/worlds/computer.webp'
+import logo42 from '../assets/logos/heilbronn42.webp'
+import logoDuth from '../assets/logos/duth-mbg.webp'
+import logoBrfaa from '../assets/logos/brfaa.webp'
+
+// Timeline logos, shown on the right of each entry. All three share one width
+// (logoClass) so their right and left edges line up from top to bottom.
+const logos = {
+  '42': { src: logo42, alt: '42 Heilbronn' },
+  duth: { src: logoDuth, alt: 'Department of Molecular Biology & Genetics, Democritus University of Thrace' },
+  brfaa: { src: logoBrfaa, alt: 'Biomedical Research Foundation of the Academy of Athens' },
+}
+const logoClass = 'w-40 h-auto object-contain opacity-80 transition-opacity duration-300 hover:opacity-100 select-none'
 
 // Illustration shown inside each world card.
 const worldArt = { biology: dnaArt, coding: computerArt }
@@ -101,7 +113,7 @@ export default function Home() {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {(['biology', 'coding'] as const).map((w, i) => (
             <Reveal key={w} delay={i * 0.1}>
-              <Card to={worlds[w].path} eyebrow={worlds[w].period} title={worlds[w].label} text={worlds[w].blurb} large accent={w} image={worldArt[w]} />
+              <Card to={worlds[w].path} eyebrow={worlds[w].highlights} title={worlds[w].label} text={worlds[w].blurb} large accent={w} image={worldArt[w]} />
             </Reveal>
           ))}
         </div>
@@ -123,13 +135,39 @@ export default function Home() {
         <div className="mt-10 border-t border-line">
           {timeline.map((t) => (
             <Reveal key={t.title}>
-              <div className="grid gap-3 border-b border-line py-10 md:grid-cols-[12rem_1fr_auto] md:gap-10">
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted pt-2">{t.dates}</p>
+              {/* Logos on the left, dates above each title.
+                  relative: lets a sub-entry logo (BRFAA) sit in the left column. */}
+              <div className="relative grid gap-5 border-b border-line py-10 md:grid-cols-[12rem_1fr] md:gap-10">
+                {t.logo ? (
+                  <img src={logos[t.logo].src} alt={logos[t.logo].alt} loading="lazy" className={`md:mt-1 ${logoClass}`} />
+                ) : (
+                  <span className="hidden md:block" />
+                )}
                 <div>
-                  <h3 className="text-2xl font-bold tracking-tight">{t.title}</h3>
-                  <p className="mt-3 max-w-3xl text-muted leading-relaxed">{t.text}</p>
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">{t.dates}</p>
+                  <h3 className="mt-2 text-2xl font-bold tracking-tight">{t.title}</h3>
+                  <p className="mt-3 max-w-4xl text-muted leading-relaxed">{t.text}</p>
+                  {/* Sub-entries: indented, joined by a thin purple line. */}
+                  {t.sub && (
+                    <ul className="mt-8 space-y-6 border-l border-[#a78bfa]/40 pl-6">
+                      {t.sub.map((s) => (
+                        <li key={s.title}>
+                          <div className="relative">
+                            <span aria-hidden className="absolute -left-[1.85rem] top-1.5 h-2.5 w-2.5 rounded-full bg-[#a78bfa]" />
+                            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">{s.dates}</p>
+                          </div>
+                          {/* On wide screens the logo moves to the left column,
+                              keeping its place in height: its top lines up with this title. */}
+                          {s.logo && (
+                            <img src={logos[s.logo].src} alt={logos[s.logo].alt} loading="lazy" className={`mt-4 md:absolute md:left-0 md:mt-1.5 ${logoClass}`} />
+                          )}
+                          <h4 className="mt-1.5 text-lg font-semibold tracking-tight">{s.title}</h4>
+                          <p className="mt-1.5 max-w-4xl text-muted leading-relaxed">{s.text}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <span className="self-start rounded-full border border-line px-3 py-1.5 text-xs uppercase tracking-wider text-muted">{t.tag}</span>
               </div>
             </Reveal>
           ))}

@@ -41,34 +41,56 @@ export const profile = {
     // 'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
 }
 
-export const worlds: Record<World, { label: string; path: string; period: string; blurb: string }> = {
+// period: shown on the hub pages. highlights: shown on the home cards, says what is inside the hub.
+export const worlds: Record<World, { label: string; path: string; period: string; highlights: string; blurb: string }> = {
   biology: {
     label: 'Molecular Biology & Genetics',
     path: '/biology',
     period: 'BSc DUTH · 2018 – 2023',
-    blurb: 'Research on gene regulatory netowrks, lab techniques, and many scientific presentations',
+    highlights: 'Thesis · Presentations · Lab book',
+    blurb: 'Research on gene regulatory networks, lab techniques, and many scientific presentations',
   },
   coding: {
     label: 'Software Engineering',
     path: '/coding',
     period: '42 Heilbronn · 2023 – 2026',
-    blurb: 'From low-level C and C++ to full-stack web development and UX/UI Design. My graduation project is where code and design finally clicked.',
+    highlights: 'PongJam · miniRT · 42 projects',
+    blurb: 'From low-level C and C++ to full-stack web development and UX/UI design. My graduation project is where code and design finally clicked.',
   },
 }
 
 // About section on the home page: newest first, like the reference timeline.
-export const timeline: { dates: string; title: string; text: string; tag: string }[] = [
+// sub: smaller entries shown indented under a main entry (e.g. lab roles during the BSc).
+// logo: a key into the logo map in Home.tsx (files live in src/assets/logos/).
+type TimelineLogo = '42' | 'duth' | 'brfaa'
+type TimelineSub = { dates: string; title: string; text: string; logo?: TimelineLogo }
+export const timeline: { dates: string; title: string; text: string; tag: string; logo?: TimelineLogo; sub?: TimelineSub[] }[] = [
   {
     dates: 'Mar 2023 — Sep 2026',
     title: '42 Heilbronn · Software Engineering',
     text: 'Scholarship programme in software engineering: C, C++, Python, Docker and full-stack web. My graduation project was PongJam, a realtime multiplayer web platform where I designed and built the frontend.',
     tag: 'Software engineering',
+    logo: '42',
   },
   {
     dates: 'Sep 2018 — Jul 2023',
     title: 'Democritus University of Thrace · BSc Molecular Biology & Genetics',
-    text: 'Graduated with Distinction (9.22/10, top 3 of my class). Thesis at BRFAA in Athens on gene regulatory networks in breast cancer cells, graded 10/10.',
+    text: 'Graduated with Distinction (9.22/10, top 3 of my class), supported by an NSRF scholarship. Thesis on gene regulatory networks in breast cancer cells, graded 10/10.',
     tag: 'Molecular biology',
+    logo: 'duth',
+    sub: [
+      {
+        dates: 'Mar 2022 — Feb 2023',
+        title: 'Research intern · Biomedical Research Foundation of the Academy of Athens',
+        logo: 'brfaa',
+        text: 'Thesis research: Prox1 overexpression in breast cancer cell lines (MCF7, MDA-MB-231) using adenoviral vectors, analysed with RT-qPCR.',
+      },
+      {
+        dates: 'Feb 2020 — Dec 2021',
+        title: 'Laboratory assistant · Democritus University of Thrace',
+        text: 'Two years of hands-on training in a university lab alongside my studies.',
+      },
+    ],
   },
 ]
 
