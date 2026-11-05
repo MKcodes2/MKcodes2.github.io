@@ -52,6 +52,18 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-box-decoration-break: slice; box-decoration-break: slice;
 }
+/* Hub page titles: white fading into the colour of that world (cyan for software, purple for biology).
+   Used on an inline span, like the home slogan, so letters such as g are not cut at the bottom. */
+.hub-gradient-coding {
+  background: linear-gradient(90deg, #ffffff 0%, #e6f6fe 30%, #a6dcfa 65%, #7cd3f2 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-box-decoration-break: slice; box-decoration-break: slice;
+}
+.hub-gradient-biology {
+  background: linear-gradient(90deg, #ffffff 0%, #efe9ff 30%, #c4b1ff 65%, #a78bfa 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-box-decoration-break: slice; box-decoration-break: slice;
+}
 /* Hero portrait: soften the hard edges of the desk on the sides and bottom. */
 .portrait-fade {
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent), linear-gradient(to bottom, black 85%, transparent);

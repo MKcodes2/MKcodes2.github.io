@@ -107,9 +107,60 @@ export const leadership: { title: string; text: string }[] = [
   { title: '42 Student Council', text: 'TODO: role and years.' },
 ]
 
+// Coding hub (the 42 journey page).
+// curriculum: the core curriculum from the 42 transcript, shown in the expandable table.
+// Exams are left out because they have no description or workload.
 export const codingHub = {
   intro: [
-    'TODO: what 42 is (peer-to-peer, project-based, no teachers), the scholarship, and what you learned there.',
+    '42 has no classes and no teachers. Its curriculum is project-based and peer-to-peer: students “learn to learn” by building projects together and taking ideas from each other.',
+    'I joined 42 Heilbronn on a full scholarship in March 2023.',
+  ],
+  ranking: 'In 2026, the World University Rankings for Innovation (WURI) named 42 the 3rd most innovative educational institution in the world.',
+  certificate: {
+    heading: 'Core curriculum, completed',
+    text: 'In September 2026 I completed the core curriculum and received 42’s certificate “Curriculum of Architect in Digital Technologies”, at Junior Developer level.',
+    link: '', // TODO: the Credly badge URL
+  },
+  holyGraph: 'The Holy Graph is 42’s map of the core curriculum. Every project I completed is lit up in blue.',
+  curriculum: [
+    { rank: 0, projects: [
+      { name: 'Libft', details: 'Reimplementation of key C standard library functions and custom utilities.', hours: 70 },
+    ] },
+    { rank: 1, projects: [
+      { name: 'ft_printf', details: 'Custom printf using variadic functions and format specifiers in C.', hours: 70 },
+      { name: 'get_next_line', details: 'Read file or input content line by line with buffer management in C.', hours: 70 },
+      { name: 'Born2beroot', details: 'Introduction to system administration and virtualisation with Linux.', hours: 40 },
+    ] },
+    { rank: 2, projects: [
+      { name: 'so_long', details: 'Create a 2D game with player movement, collectibles and event handling in C.', hours: 60 },
+      { name: 'pipex', details: 'Implement UNIX pipe mechanics to connect processes and manage I/O in C.', hours: 50 },
+      { name: 'push_swap', details: 'Sort a stack with a minimal set of operations using sorting algorithms in C.', hours: 60 },
+    ] },
+    { rank: 3, projects: [
+      { name: 'minishell', details: 'Team project: develop a mini bash handling signals, commands, paths and env variables in C.', hours: 210 },
+      { name: 'Philosophers', details: 'Learn concurrency using threads and mutexes in the dining philosophers problem in C.', hours: 70 },
+    ] },
+    { rank: 4, projects: [
+      { name: 'miniRT', details: 'Team project: build a ray tracer rendering 3D scenes with shapes and lighting in C.', hours: 280 },
+      { name: 'NetPractice', details: 'Configure IP routing and subnetting to build functional network connections.', hours: 50 },
+      { name: 'CPP Module 00', details: 'Understand C++ basics vs C: namespaces, classes, stdlib and intro to OOP.', hours: 22 },
+      { name: 'CPP Module 01', details: 'Study memory allocation, references and member pointers in C++.', hours: 12 },
+      { name: 'CPP Module 02', details: 'Explore polymorphism, function overloading and canonical form in C++.', hours: 12 },
+      { name: 'CPP Module 03', details: 'Learn inheritance principles and how to extend class behaviour in C++.', hours: 12 },
+      { name: 'CPP Module 04', details: 'Use abstract classes, interfaces and subtype polymorphism in C++.', hours: 12 },
+    ] },
+    { rank: 5, projects: [
+      { name: 'CPP Module 05', details: 'Handle exceptions with try/catch and understand error management in C++.', hours: 25 },
+      { name: 'CPP Module 06', details: 'Apply static, dynamic, const and reinterpret casts properly in C++.', hours: 25 },
+      { name: 'CPP Module 07', details: 'Learn to write and use generic functions and classes with templates in C++.', hours: 25 },
+      { name: 'CPP Module 08', details: 'Use STL-style containers, iterators and algorithms via templates in C++.', hours: 25 },
+      { name: 'CPP Module 09', details: 'Deepen understanding of STL containers like vector, map, set and deque.', hours: 40 },
+      { name: 'webserv', details: 'Team project: build an HTTP server to handle requests, responses and browser testing in C++.', hours: 175 },
+      { name: 'Inception', details: 'Learn system administration fundamentals by virtualising multiple Docker images.', hours: 210 },
+    ] },
+    { rank: 6, projects: [
+      { name: 'ft_transcendence', details: 'Team project: build and manage a full-stack web game platform from scratch (PongJam).', hours: 245 },
+    ] },
   ],
 }
 
