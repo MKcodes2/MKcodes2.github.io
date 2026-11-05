@@ -44,18 +44,18 @@ export const profile = {
 // period: shown on the hub pages. highlights: shown on the home cards, says what is inside the hub.
 export const worlds: Record<World, { label: string; path: string; period: string; highlights: string; blurb: string }> = {
   biology: {
-    label: 'Molecular Biology & Genetics',
+    label: 'Molecular Biology',
     path: '/biology',
     period: 'BSc DUTH · 2018 – 2023',
-    highlights: 'Thesis · Presentations · Lab book',
-    blurb: 'Research on gene regulatory networks, lab techniques, and many scientific presentations',
+    highlights: 'The DUTH and BRFAA journey',
+    blurb: 'Thesis research on gene regulatory networks (cell culture, adenoviral infection, qPCR), two years of recombinant DNA work, and scientific presentations…',
   },
   coding: {
     label: 'Software Engineering',
     path: '/coding',
     period: '42 Heilbronn · 2023 – 2026',
-    highlights: 'PongJam · miniRT · 42 projects',
-    blurb: 'From low-level C and C++ to full-stack web development and UX/UI design. My graduation project is where code and design finally clicked.',
+    highlights: 'The 42 Journey',
+    blurb: 'Projects from low-level C (memory management, multiprocessing, sorting algorithms), C++ and Python, to full-stack web development and UX/UI design...',
   },
 }
 
