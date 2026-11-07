@@ -1,6 +1,21 @@
 // All site text lives here, so copy can be edited without touching components.
 // Anything marked TODO is waiting for Mary Kate's own words or details.
 
+import pjSignupVideo from './assets/pongjam/registration.mp4'
+import pjSignupPoster from './assets/pongjam/registration-poster.webp'
+import pjComputerFrame from './assets/pongjam/computer-frame.webp'
+import pjModesVideo from './assets/pongjam/game-modes.mp4'
+import pjModesPoster from './assets/pongjam/game-modes-poster.webp'
+import pjCustomImg from './assets/pongjam/custom-game.webp'
+import pjTournVideo from './assets/pongjam/tournaments.mp4'
+import pjTournPoster from './assets/pongjam/tournaments-poster.webp'
+import pjChatVideo from './assets/pongjam/chat.mp4'
+import pjChatPoster from './assets/pongjam/chat-poster.webp'
+import pjGameVideo from './assets/pongjam/game.mp4'
+import pjGamePoster from './assets/pongjam/game-poster.webp'
+import pjSettingsVideo from './assets/pongjam/user-settings.mp4'
+import pjSettingsPoster from './assets/pongjam/user-settings-poster.webp'
+
 export type World = 'coding' | 'biology'
 
 export interface Link {
@@ -8,9 +23,20 @@ export interface Link {
   href: string
 }
 
+// A screen recording (silent, looping video with a still poster) or a still image.
+export interface Media {
+  video?: string
+  poster?: string
+  image?: string
+  alt: string
+}
+
 export interface Section {
   heading: string
-  body: string[]
+  body: string[] // paragraphs; supports **bold**, _italic_, ==accent colour== and [links](https://…)
+  features?: { title: string; text: string; media: Media }[] // tiles with a recording each
+  points?: { title: string; text: string }[] // short titled paragraphs, e.g. design decisions
+  pointsHeading?: string // optional sub-heading shown above the points
 }
 
 export interface DetailPage {
@@ -20,6 +46,8 @@ export interface DetailPage {
   summary: string // one line, used on cards
   meta: string[] // small facts under the title (team size, stack, dates)
   featured?: boolean // full case study vs shorter page
+  hero?: Media // large recording under the title
+  heroFrame?: string // optional device image (transparent screen) the hero plays inside
   sections: Section[]
   links: Link[]
 }
@@ -186,16 +214,82 @@ export const pages: DetailPage[] = [
     slug: 'pongjam',
     world: 'coding',
     title: 'PongJam',
-    summary: 'Realtime multiplayer Pong platform. I designed and built the whole frontend and UI.',
-    meta: ['Graduation project', 'Team of 5', 'TypeScript · TailwindCSS · Socket.io · BabylonJS'],
+    summary: 'A realtime multiplayer Pong platform, built from scratch by a team of five as our graduation project at 42. I designed the UI and built it into the frontend: the neon arcade look, the icon-based navbar and the layout of every page.',
+    meta: ['Frontend development', 'UX/UI design', 'TypeScript', 'TailwindCSS', 'HTML', 'Docker', 'README', 'Documentation'],
     featured: true,
+    hero: { video: pjSignupVideo, poster: pjSignupPoster, alt: 'Screen recording of signing up for PongJam' },
+    heroFrame: pjComputerFrame,
     sections: [
-      { heading: 'The problem', body: ['TODO'] },
-      { heading: 'My role', body: ['TODO'] },
-      { heading: 'Decisions and why', body: ['TODO: the grouped icon navigation, the game-mode page, the neon visual identity.'] },
-      { heading: 'What I would improve', body: ['TODO'] },
+      {
+        heading: 'Project description',
+        body: [
+          '_The goal of this project was to build a modern web platform for the **legendary Pong game**—but with a twist: multiplayer, tournaments, chat, 3D graphics, and even AI opponents._',
+          'In simpler words: imagine gathering with friends, entering your nicknames, and playing Pong directly in your browser—not only **one-on-one** on the same keyboard, but also **remotely against players online**, or even against a computer-controlled opponent (**AI**). The platform keeps track of who plays against whom, organises **tournaments**, and lets you **chat live** while the games unfold.',
+          'Behind the scenes, we combined a frontend in ==TypeScript + TailwindCSS== with a backend of **microservices** (for authentication, matchmaking, chat, etc.) powered by **Fastify** and **SQLite**. For security, we added **Google login**, **2-Factor Authentication**, and **JWT tokens**, while monitoring is handled through **Prometheus** & **Grafana**. The game itself is enhanced with **3D visuals** (BabylonJS) that give a fresh look to the classic pong.',
+          'In its final form, this project is not just “Pong”—it’s _a full multiplayer gaming experience on the web, reimagined with today’s technologies, AI challenges, and 3D design_.',
+        ],
+      },
+      {
+        heading: 'My role',
+        body: ['PongJam was a team project of five people. I was responsible for the ==UI/UX design== and for building it into the ==frontend==: the look and **layout of every page**, the asset generation, and the organisation of the **navigation bar** and its icons. I also authored the project [README ↗](https://github.com/MKcodes2/PongJam#readme) with full **installation instructions** for launching the game.'],
+      },
+      {
+        heading: 'What you can do',
+        body: [],
+        features: [
+          {
+            title: 'Game modes',
+            text: 'Play 1v1 on one keyboard (WASD and arrow keys), against an AI at different levels, or online with 2 or 4 players.',
+            media: { video: pjModesVideo, poster: pjModesPoster, alt: 'Screen recording of choosing a game mode' },
+          },
+          {
+            title: 'Custom games',
+            text: 'Choose the number of players, the AI difficulty, a time or score limit, obstacles and a kicker mode.',
+            media: { image: pjCustomImg, alt: 'The custom game settings screen' },
+          },
+          {
+            title: 'Tournaments',
+            text: 'An admin creates the tournament, everyone plays everyone (round robin) and the highest total score wins.',
+            media: { video: pjTournVideo, poster: pjTournPoster, alt: 'Screen recording of the tournaments page' },
+          },
+          {
+            title: 'The game',
+            text: 'Every custom setting changes the match, so the same game can be anything from classic Pong to every option switched on at once.',
+            media: { video: pjGameVideo, poster: pjGamePoster, alt: 'Gameplay recording: a simple match, then one with every setting switched on' },
+          },
+          {
+            title: 'User settings',
+            text: 'Upload a new avatar, update your username, email and 2FA method, and change your password, all from one page.',
+            media: { video: pjSettingsVideo, poster: pjSettingsPoster, alt: 'Screen recording of the user settings page' },
+          },
+          {
+            title: 'Live chat',
+            text: 'Private and tournament chats. Block a user, invite them to a 1v1, or minimise the chat while you play.',
+            media: { video: pjChatVideo, poster: pjChatPoster, alt: 'Screen recording of the live chat' },
+          },
+        ],
+      },
+      {
+        heading: 'Decisions and why',
+        body: [],
+        points: [
+          {
+            title: 'Icons instead of a crowded navbar',
+            text: 'As the project grew, the navbar collected 10 to 12 text links, because everyone added a link to their own page. It was chaos. I reorganised it: game modes and tournaments moved to the home page, and the navbar became about five core icons (settings, users, profile, tournaments and so on) that I designed myself. In a game you don’t want lots of words around you; icons are quicker to read and more fun.',
+          },
+          {
+            title: 'The home page is the game',
+            text: 'With the game modes and tournaments on the home page, players land straight on what they came for: playing.',
+          },
+          {
+            title: 'A neon arcade identity',
+            text: 'Dark purple backgrounds, neon accents and a glowing outlined logo give PongJam the feel of a retro arcade.',
+          },
+        ],
+      },
+      // TODO: 'What I would improve', in Mary Kate's words.
     ],
-    links: [{ label: 'GitHub', href: 'https://github.com/MKcodes2/PongJam' }],
+    links: [{ label: 'View on GitHub', href: 'https://github.com/MKcodes2/PongJam' }],
   },
   {
     slug: 'minirt',
