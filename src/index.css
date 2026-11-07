@@ -94,7 +94,7 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
    The background is twice as wide as the word: gradient on the left half, plain grey on the
    right half. At rest we show the grey half; on hover we slide to the gradient half. */
 .nav-sweep {
-  background-image: linear-gradient(90deg, #a78bfa 0%, #8fa8ff 22%, #7cc8f5 44%, var(--color-muted) 56%, var(--color-muted) 100%);
+  background-image: linear-gradient(90deg, #b9a3ff 0%, #9fb0ff 22%, #8cd0f7 44%, var(--color-muted) 56%, var(--color-muted) 100%); /* bright lavender to cyan: between the footer lavender and the brand purple */
   background-size: 200% 100%; background-position: 100% 0;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   transition: background-position 0.5s ease;
