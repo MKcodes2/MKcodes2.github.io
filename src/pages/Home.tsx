@@ -5,6 +5,10 @@ import Card from '../components/Card'
 import GlowDivider from '../components/GlowDivider'
 import Page from '../components/Page'
 import { honours, leadership, profile, timeline, worlds } from '../content'
+
+// Fades the four edges of a picture into the card, for logos that only exist on a white background.
+const fade = 'linear-gradient(to right, transparent, black 22%, black 78%, transparent), linear-gradient(to bottom, transparent, black 22%, black 78%, transparent)'
+const softEdges = { maskImage: fade, WebkitMaskImage: fade, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' } as const
 import { useSectionNav } from '../components/useSectionNav'
 import HeroPortrait from '../components/HeroPortrait'
 import dnaArt from '../assets/worlds/dna.webp'
@@ -181,13 +185,20 @@ export default function Home() {
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           {honours.map((h, i) => (
             <Reveal key={h.title} delay={(i % 2) * 0.1}>
-              <div className="flex h-full gap-5 rounded-3xl border border-line bg-surface p-6 backdrop-blur-sm">
-                <div className="h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-white/[0.04]">
-                  {h.image && <img src={h.image} alt="" className="h-full w-full object-cover" />}
+              <div className="flex h-full gap-5 rounded-3xl border border-white/[0.16] bg-surface p-6 backdrop-blur-sm">
+                <div className={`h-24 w-24 shrink-0 ${h.imageStyle === 'bare' ? '' : 'overflow-hidden rounded-2xl bg-white/[0.04]'}`}>
+                  {h.image && (
+                    <img
+                      src={h.image}
+                      alt=""
+                      className={`h-full w-full ${h.imageStyle === 'logo' ? 'object-contain p-4 opacity-80' : h.imageStyle === 'bare' ? 'object-contain' : 'object-cover'}`}
+                      style={h.imageStyle === 'soft' ? softEdges : undefined}
+                    />
+                  )}
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold">{h.title}</h3>
-                  {h.year && <p className="font-mono text-xs text-muted mt-1">{h.year}</p>}
+                  {h.year && <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">{h.year}</p>}
+                  <h3 className="mt-1.5 text-lg font-bold">{h.title}</h3>
                   <p className="mt-2 text-sm text-muted">{h.text}</p>
                 </div>
               </div>
@@ -195,11 +206,11 @@ export default function Home() {
           ))}
         </div>
 
-        <Reveal><h3 className="mt-20 label">Leadership</h3></Reveal>
+        <Reveal><h3 className="mt-20 text-2xl sm:text-3xl font-bold tracking-[-0.03em]">Leadership</h3></Reveal>
         <div className="mt-6 grid gap-6 sm:grid-cols-3">
           {leadership.map((l) => (
             <Reveal key={l.title}>
-              <div className="h-full rounded-3xl border border-line bg-surface p-6 backdrop-blur-sm">
+              <div className="h-full rounded-3xl border border-white/[0.16] bg-surface p-6 backdrop-blur-sm">
                 <h4 className="font-bold">{l.title}</h4>
                 <p className="mt-2 text-sm text-muted">{l.text}</p>
               </div>

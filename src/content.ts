@@ -15,6 +15,12 @@ import pjGameVideo from './assets/pongjam/game.mp4'
 import pjGamePoster from './assets/pongjam/game-poster.webp'
 import pjSettingsVideo from './assets/pongjam/user-settings.mp4'
 import pjSettingsPoster from './assets/pongjam/user-settings-poster.webp'
+import logo42 from './assets/logos/42white.webp'
+import logoNsrf from './assets/logos/eu-nsrf.webp'
+import logoHarvard from './assets/logos/harvard.webp'
+import logoHms from './assets/logos/hms.webp'
+import logoPanhellenics from './assets/logos/panhellenics.webp'
+import logoEuroscola from './assets/logos/euroscola.webp'
 
 export type World = 'coding' | 'biology'
 
@@ -122,17 +128,20 @@ export const timeline: { dates: string; title: string; text: string; tag: string
   },
 ]
 
-export const honours: { title: string; year: string; text: string; image?: string }[] = [
-  { title: 'Harvard high school summer program', year: 'TODO', text: 'TODO: name of the program and what you did.' },
-  { title: 'Euroscola', year: 'TODO', text: 'TODO: what it was and what you did.' },
-  { title: 'NSRF scholarship', year: 'TODO', text: 'For academic and social merit during my BSc.' },
-  { title: '42 Heilbronn scholarship', year: '2023', text: 'Full scholarship for the software engineering program.' },
+// image: picture or logo in the box on the left. imageStyle 'logo' = centred with padding, 'soft' = fills the box with faded edges, 'bare' = no box behind it (for transparent round logos).
+export const honours: { title: string; year: string; text: string; image?: string; imageStyle?: 'logo' | 'soft' | 'bare' }[] = [
+  { title: '42 Heilbronn scholarship', year: '2023', text: '18-month full scholarship: 140 hours a month on site and a faster project pace than the standard curriculum.', image: logo42 },
+  { title: 'NSRF scholarship', year: '2020', text: 'One of 40 students across DUTH selected on academic merit and social criteria for financial support.', image: logoNsrf },
+  { title: 'Panhellenic Examinations, Physics', year: '2018', text: 'Scored 100/100 in Physics in the national university entrance exams, in the top 0.11% nationally.', image: logoPanhellenics },
+  { title: 'Harvard University, High School Summer Program', year: '2017', text: 'Three intensive weeks with Harvard’s Center for Hellenic Studies: philosophy, social and political science, and an EU summit simulation.', image: logoHarvard },
+  { title: 'Euroscola, European Parliament', year: '2016', text: 'Selected as my region’s representative for a plenary simulation in English, debating EU policy with students from across the EU.', image: logoEuroscola },
+  { title: 'Thalis Mathematics Competition', year: '2015', text: 'Award in the 74th Panhellenic Mathematics Competition “Thalis” of the Hellenic Mathematical Society.', image: logoHms, imageStyle: 'bare' },
 ]
 
 export const leadership: { title: string; text: string }[] = [
-  { title: 'Class president', text: 'TODO: school, years.' },
-  { title: 'University Board of Directors', text: 'TODO: role and years.' },
-  { title: '42 Student Council', text: 'TODO: role and years.' },
+  { title: '42 Student Council', text: 'Elected by the students of 42 Heilbronn to its last student council.' },
+  { title: 'Student Cultural Club “PYXIDA”, DUTH', text: 'Elected special secretary, linking the cultural and artistic student groups to the Board.' },
+  { title: 'Class president', text: 'Elected high school class president for consecutive years.' },
 ]
 
 // Coding hub (the 42 journey page).
@@ -201,7 +210,7 @@ export const biologyHub = {
   ],
   intro: ['TODO: a short paragraph on the degree and what drew you to molecular biology.'],
   techniques: ['Cell culture', 'PCR / qPCR', 'DNA cloning', 'Adenoviral overexpression', 'Gel electrophoresis'],
-  labAssistant: 'Lab assistant, DUTh, Feb 2020 – Dec 2021. TODO: one or two lines on what you did.',
+  labAssistant: 'Lab assistant, DUTH, Feb 2020 – Dec 2021. TODO: one or two lines on what you did.',
   teaching: {
     heading: 'Teaching Certification',
     body: 'TODO: what the certification covered (teaching methodology, educational psychology, adult education, teaching practicum).',
