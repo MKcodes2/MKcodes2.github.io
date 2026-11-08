@@ -96,37 +96,37 @@ export const timeline: { dates: string; title: string; text: string; tag: string
   {
     dates: 'Mar 2023 — Sep 2026',
     title: 'Software Engineering · 42 Heilbronn',
-    text: 'Scholarship programme in software engineering: C, C++, Python, Docker and full-stack web. My graduation project was PongJam, a realtime multiplayer web platform where I designed and built the frontend.',
+    text: 'A project-based, peer-to-peer program with no teachers or classes. My projects ranged from C and Unix systems (processes, threads, memory allocation, a bash-like shell) to C++, an HTTP server and Docker. My graduation project was PongJam, a realtime multiplayer web platform where I designed the UI and built it into the frontend.',
     tag: 'Software engineering',
     logo: '42',
   },
   {
     dates: 'Sep 2018 — Jul 2023',
     title: 'BSc Molecular Biology & Genetics · Democritus University of Thrace',
-    text: 'Graduated with Distinction (9.22/10, top 3 of my class), supported by an NSRF scholarship. Thesis on gene regulatory networks in breast cancer cells, graded 10/10.',
+    text: 'A 240 ECTS Bachelor of Science combining theoretical foundations with extensive laboratory training, from genetics, biochemistry and genomics to bioinformatics and Molecular Neuroscience. Graduated with Distinction (9.22/10, top 3 of my class), and earned a Teaching Certification in Biosciences alongside the degree.',
     tag: 'Molecular biology',
     logo: 'duth',
     sub: [
       {
         dates: 'Mar 2022 — Feb 2023',
-        title: 'Research intern · Biomedical Research Foundation of the Academy of Athens',
+        title: 'Undergraduate researcher · Biomedical Research Foundation of the Academy of Athens',
         logo: 'brfaa',
-        text: 'Thesis research: Prox1 overexpression in breast cancer cell lines (MCF7, MDA-MB-231) using adenoviral vectors, analysed with qPCR.',
+        text: 'Thesis research on how the transcription factor Prox1 affects DNA-repair genes in breast cancer cells (MCF7, MDA-MB-231): primer design from RNA-seq data, mammalian cell culture, adenoviral overexpression, RNA extraction, cDNA synthesis and real-time PCR. Graded 10/10.',
       },
       {
         dates: 'Feb 2020 — Dec 2021',
-        title: 'Laboratory assistant · Democritus University of Thrace',
-        text: 'Two years of hands-on training in a university lab alongside my studies.',
+        title: 'Laboratory research trainee · Democritus University of Thrace',
+        text: 'Selected for a laboratory training program in DNA cloning, building my own recombinant vectors (PCR, restriction digests, ligation, bacterial transformation, DNA isolation, gel electrophoresis), all documented in a detailed hand-written lab book with a self-designed cover.',
       },
     ],
   },
 ]
 
 export const honours: { title: string; year: string; text: string; image?: string }[] = [
-  { title: 'Harvard high school summer programme', year: 'TODO', text: 'TODO: name of the programme and what you did.' },
+  { title: 'Harvard high school summer program', year: 'TODO', text: 'TODO: name of the program and what you did.' },
   { title: 'Euroscola', year: 'TODO', text: 'TODO: what it was and what you did.' },
   { title: 'NSRF scholarship', year: 'TODO', text: 'For academic and social merit during my BSc.' },
-  { title: '42 Heilbronn scholarship', year: '2023', text: 'Full scholarship for the software engineering programme.' },
+  { title: '42 Heilbronn scholarship', year: '2023', text: 'Full scholarship for the software engineering program.' },
 ]
 
 export const leadership: { title: string; text: string }[] = [

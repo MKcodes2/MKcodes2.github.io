@@ -146,7 +146,7 @@ export default function Home() {
                 <div>
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">{t.dates}</p>
                   <h3 className="mt-2 text-2xl font-bold tracking-tight">{t.title}</h3>
-                  <p className="mt-3 max-w-4xl text-muted leading-relaxed">{t.text}</p>
+                  <p className="mt-3 text-muted leading-relaxed">{t.text}</p>
                   {/* Sub-entries: indented, joined by a thin purple line. */}
                   {t.sub && (
                     <ul className="mt-8 space-y-6 border-l border-[#a78bfa]/40 pl-6">
@@ -162,7 +162,7 @@ export default function Home() {
                             <img src={logos[s.logo].src} alt={logos[s.logo].alt} loading="lazy" className={`mt-4 md:absolute md:left-0 md:mt-1.5 ${logoClass}`} />
                           )}
                           <h4 className="mt-1.5 text-lg font-semibold tracking-tight">{s.title}</h4>
-                          <p className="mt-1.5 max-w-4xl text-muted leading-relaxed">{s.text}</p>
+                          <p className="mt-1.5 text-muted leading-relaxed">{s.text}</p>
                         </li>
                       ))}
                     </ul>
