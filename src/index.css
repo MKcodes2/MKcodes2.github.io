@@ -100,11 +100,18 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   transition: background-position 0.5s ease;
 }
 .nav-sweep:hover, .nav-sweep:focus-visible { background-position: 0 0; }
-/* Name in the navbar: a soft brand-gradient glow appears behind the white letters on hover. */
-.name-glow { position: relative; isolation: isolate; }
-.name-glow::before {
-  content: ""; position: absolute; inset: -6px -14px; z-index: -1; border-radius: 9999px; pointer-events: none;
-  background: linear-gradient(90deg, #a78bfa, #8fa8ff, #7cc8f5);
-  filter: blur(16px); opacity: 0; transition: opacity 0.35s ease;
+/* Same sweep for white text (the name in the navbar and the footer links): white at rest. */
+.sweep-light {
+  background-image: linear-gradient(90deg, #b9a3ff 0%, #9fb0ff 22%, #8cd0f7 44%, var(--color-text) 56%, var(--color-text) 100%);
+  background-size: 200% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transition: background-position 0.5s ease;
 }
-.name-glow:hover::before, .name-glow:focus-visible::before { opacity: 0.55; }
+.sweep-light:hover, .sweep-light:focus-visible { background-position: 0 0; }
+/* "View my Work" (white button): on hover a bright brand gradient (same colours as the navbar sweep) fades in behind the dark text. */
+.fill-hover { position: relative; isolation: isolate; overflow: hidden; }
+.fill-hover::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: linear-gradient(90deg, #b9a3ff 0%, #9fb0ff 50%, #8cd0f7 100%); opacity: 0; transition: opacity 0.3s ease;
+}
+.fill-hover:hover::before, .fill-hover:focus-visible::before { opacity: 1; }

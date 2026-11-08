@@ -46,7 +46,7 @@ export default function Navbar() {
       {/* Edge padding in vw keeps the name and buttons at the same distance from the screen edges,
           even when zooming. The 1fr | auto | 1fr grid keeps the links centred between them. */}
       <div className="grid h-16 grid-cols-[1fr_auto] xl:grid-cols-[1fr_auto_1fr] items-center gap-6 px-[3vw]">
-        <Link to="/" onClick={goHome} className="name-glow justify-self-start whitespace-nowrap font-bold tracking-tight text-lg">
+        <Link to="/" onClick={goHome} className="sweep-light justify-self-start whitespace-nowrap font-bold tracking-tight text-lg">
           {profile.name}
         </Link>
 

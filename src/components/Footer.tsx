@@ -19,7 +19,7 @@ export default function Footer() {
               <p className="text-xs text-muted">{l.label}</p>
               <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer"
                 {...(l.label === 'CV' ? { download: true } : {})}
-                className="mt-1 inline-block break-all hover:text-lavender">{l.text}</a>
+                className="sweep-light mt-1 inline-block break-all">{l.text}</a>
             </li>
           ))}
         </ul>

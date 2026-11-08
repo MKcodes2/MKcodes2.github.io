@@ -96,7 +96,7 @@ export default function Home() {
         </div>
         <div className="mt-10 flex flex-wrap gap-4 lg:col-start-1 lg:row-start-3">
           <button type="button" onClick={() => goTo('worlds')}
-            className="rounded-full bg-white px-6 py-3.5 font-semibold text-bg hover:bg-lavender transition-colors">
+            className="fill-hover rounded-full bg-white px-6 py-3.5 font-semibold text-bg">
             View my Work ↗
           </button>
           <button type="button" onClick={() => goTo('about')}
