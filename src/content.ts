@@ -361,33 +361,83 @@ export const pages: DetailPage[] = [
     slug: 'thesis',
     world: 'biology',
     title: 'Gene regulatory networks in cancer cells',
-    summary: 'BSc thesis at BRFAA: Prox1 overexpression in breast cancer cell lines, measured with qPCR.',
-    meta: ['BRFAA, Athens', 'Mar 2022 – Feb 2023', 'Grade 10 / 10'],
+    summary: 'My BSc thesis: does the transcription factor Prox1, which may act as a tumour suppressor in breast cancer, also affect the genes that repair DNA? I overexpressed Prox1 in two breast cancer cell lines and measured 15 repair genes with real-time PCR.',
+    meta: ['Undergraduate research', 'BRFAA, Athens', 'Mar 2022 - Feb 2023', 'Graded 10 / 10'],
     featured: true,
+    // TODO: a slideshow or single image of the excerpt pages (title, contents, abstract).
+    hero: { alt: 'the pages of my thesis excerpt' },
     sections: [
-      { heading: 'The question', body: ['TODO'] },
-      { heading: 'What I did', body: ['TODO'] },
-      { heading: 'What I found', body: ['TODO'] },
-      { heading: 'What I would do next', body: ['TODO'] },
+      {
+        heading: 'The question',
+        body: [
+          'Prox1 is a transcription factor known mostly for its role in development and cell fate. Earlier work in the lab, and the literature, pointed to a **tumour-suppressing** role in breast cancer. I asked whether it might also act indirectly, through the **DNA-repair** systems that keep the genome stable: a link that had not been studied.',
+          'I tested this in two human breast cancer cell lines that differ in a way that matters here: _MCF7_, which is oestrogen-receptor positive, and _MDA-MB-231_, which is triple-negative.',
+        ],
+      },
+      {
+        heading: 'What I did',
+        body: [],
+        points: [
+          { title: 'Choosing the genes', text: 'From the lab\u2019s earlier RNA-seq of mouse Neuro2A cells overexpressing Prox1, I selected 13 DNA-repair genes whose expression changed most, added two further genes of interest (_SMARCA1_ and _SMAD3_), and designed real-time PCR primers for all 15.' },
+          { title: 'Cell culture', text: 'I cultured MCF7 and MDA-MB-231 cells, including thawing, splitting and cryopreservation, and HEK cells to prepare the adenovirus.' },
+          { title: 'Overexpressing Prox1', text: 'A three-day infection with an adenovirus carrying either Prox1 or GFP as the control, checked under a fluorescence microscope before I went on.' },
+          { title: 'Measuring the genes', text: 'RNA extraction, cDNA synthesis and real-time PCR for all 15 genes, three biological replicates per cell line, analysed with the \u0394\u0394Cq method.' },
+        ],
+        features: [
+          // TODO: her own fluorescence microscopy photographs (Figure 15 of the thesis).
+          { title: 'MCF7', text: 'Cells expressing GFP three days after infection with the control adenovirus.', media: { alt: 'MCF7 cells under the fluorescence microscope' } },
+          { title: 'MDA-MB-231', text: 'The same check in the triple-negative line, confirming the infection worked.', media: { alt: 'MDA-MB-231 cells under the fluorescence microscope' } },
+        ],
+      },
+      {
+        heading: 'What I found',
+        body: [
+          'Eight of the 15 genes changed significantly in each cell line, but the two lines agreed on only five: ==XPA, LIG4, PIN4, WEE1 and DDIT3==, all higher when Prox1 was overexpressed. Only the first three matched the direction seen in the mouse data.',
+        ],
+        points: [
+          { title: 'The clearest effect points the other way', text: 'LIG4 rose the most in both lines. High LIG4 has been linked to more aggressive breast cancer, because efficient repair helps tumour cells survive chemotherapy and radiotherapy. WEE1, also higher in both lines, is generally treated as an oncogene in breast cancer.' },
+          { title: 'Some differences follow the receptor', text: 'ATM and PRKDC dropped only in the ER-positive MCF7 cells. Both are connected to oestrogen-receptor signalling, which may be why the triple-negative line behaved differently.' },
+          { title: 'No safe conclusion', text: 'So the results do not support a simple story. They deepen the **dual role** already described for Prox1 rather than settling it, and they do not establish a link between Prox1 and DNA repair.' },
+        ],
+      },
+      {
+        heading: 'What I would do next',
+        body: [
+          'DNA-repair assays would measure damage and repair directly, instead of inferring them from expression. Co-immunoprecipitation would show whether Prox1 physically interacts with repair proteins. Above all, breast cancer is heterogeneous, so any of this needs several more cell lines before it means much.',
+        ],
+      },
     ],
+    // TODO: link to the excerpt (title page, contents, abstract) once it is uploaded.
     links: [],
   },
   {
     slug: 'presentations',
     world: 'biology',
-    title: 'Molecular biology presentations',
-    summary: 'Five presentations I researched and designed. Originals are in Greek.',
-    meta: ['Science communication', 'Visual design'],
-    sections: [{ heading: 'About', body: ['TODO: one card per presentation with an English title and 2–3 lines.'] }],
-    links: [],
-  },
-  {
-    slug: 'lab-book',
-    world: 'biology',
-    title: 'Lab book cover',
-    summary: 'A lab notebook cover I designed myself, long before I learned to code.',
-    meta: ['Visual design'],
-    sections: [{ heading: 'About', body: ['TODO'] }],
+    title: 'Presentations and lab book cover',
+    summary: 'Five molecular biology presentations I researched and designed, and the cover I drew for my own lab notebook. The originals are in Greek.',
+    meta: ['Scientific communication & design', 'DUTH', '2018 - 2023'],
+    sections: [
+      {
+        heading: 'Presentations',
+        body: ['TODO: two or three lines on how you choose what to show and how you design a slide.'],
+        features: [
+          // TODO: one image per presentation, plus an English title and two lines each.
+          { title: 'Breast cancer', text: 'TODO', media: { alt: 'a slide from the breast cancer presentation' } },
+          { title: 'Epigenetics', text: 'TODO', media: { alt: 'a slide from the epigenetics presentation' } },
+          { title: 'SNAREs', text: 'TODO', media: { alt: 'a slide from the SNARE presentation' } },
+          { title: 'Nobel Prize', text: 'TODO', media: { alt: 'a slide from the Nobel Prize presentation' } },
+          { title: 'Epidemic modelling', text: 'TODO', media: { alt: 'a slide from the epidemic modelling presentation' } },
+        ],
+      },
+      {
+        heading: 'Lab book cover',
+        body: ['TODO: two lines on the cover you designed for your lab notebook, long before you learned to code.'],
+        features: [
+          // TODO: a photograph of the cover.
+          { title: 'The cover', text: 'TODO', media: { alt: 'the cover I designed for my lab notebook' } },
+        ],
+      },
+    ],
     links: [],
   },
 ]

@@ -22,6 +22,14 @@ export default function MediaView({ media, className = '' }: { media: Media; cla
     return () => observer.disconnect()
   }, [reduced])
 
+  // No file yet: a dashed box naming what goes there, so the layout can be reviewed first.
+  if (!media.video && !media.image) {
+    return (
+      <div className={`flex aspect-video w-full items-center justify-center border border-dashed border-white/25 p-6 text-center text-sm text-muted ${className}`}>
+        Image to come: {media.alt}
+      </div>
+    )
+  }
   if (!media.video) {
     return <img src={media.image} alt={media.alt} loading="lazy" className={`block w-full ${className}`} />
   }

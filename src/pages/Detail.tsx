@@ -114,7 +114,7 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
           {s.points.map((p) => (
             <div key={p.title} className={`border-l-2 pl-4 ${a.bar}`}>
               <h3 className="font-semibold text-text">{p.title}</h3>
-              <p className="mt-1.5 text-muted leading-relaxed">{p.text}</p>
+              <p className="mt-1.5 text-muted leading-relaxed">{inline(p.text, a)}</p>
             </div>
           ))}
         </div>
