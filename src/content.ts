@@ -406,7 +406,7 @@ export const pages: DetailPage[] = [
       {
         heading: 'What I found',
         body: [
-          'Eight of the 15 genes changed significantly in each cell line, and five of them rose in both when Prox1 was overexpressed: ==XPA, LIG4, PIN4, WEE1 and DDIT3==. Prox1 could regulate them directly, by binding their regulatory regions, or indirectly, through the pathways and gene networks it takes part in.',
+          'Eight of the 15 genes changed significantly in each cell line, and five of them rose in both when Prox1 was overexpressed: ==XPA==, ==LIG4==, ==PIN4==, ==WEE1== and ==DDIT3==. Prox1 could regulate them directly, by binding their regulatory regions, or indirectly, through the pathways and gene networks it takes part in.',
         ],
         pointsStyle: 'list',
         points: [
