@@ -108,6 +108,16 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   transition: background-position 0.5s ease;
 }
 .sweep-light:hover, .sweep-light:focus-visible { background-position: 0 0; }
+.sweep-biology, .sweep-coding {
+  background-size: 200% 100%; background-position: 100% 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transition: background-position 0.5s ease;
+}
+.sweep-biology { background-image: linear-gradient(90deg, #ffffff 0%, #efe9ff 22%, #c4b1ff 44%, #a78bfa 56%, #a78bfa 100%); }
+.sweep-coding { background-image: linear-gradient(90deg, #ffffff 0%, #e6f6fe 22%, #a6dcfa 44%, #7cc8f5 56%, #7cc8f5 100%); }
+.group:hover .sweep-biology, .group:hover .sweep-coding,
+.group:focus-visible .sweep-biology, .group:focus-visible .sweep-coding { background-position: 0 0; }
+
 /* "View my Work" (white button): on hover a bright brand gradient (same colours as the navbar sweep) fades in behind the dark text. */
 .fill-hover { position: relative; isolation: isolate; overflow: hidden; }
 .fill-hover::before {

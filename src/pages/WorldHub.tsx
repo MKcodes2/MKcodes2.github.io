@@ -81,10 +81,10 @@ function CodingIntro() {
       </div>
 
       {/* Full project list, hidden until the visitor opens it. */}
-      <details className="group mt-10 rounded-2xl border border-[#7cc8f5]/30 bg-surface backdrop-blur-sm transition-all duration-300 hover:border-[#7cc8f5]/80 hover:shadow-[0_0_40px_-6px_rgba(124,200,245,0.55)]">
+      <details className="group mt-10 rounded-2xl border border-[#7cc8f5]/30 bg-surface backdrop-blur-sm transition-colors duration-300 hover:border-[#7cc8f5]/55 hover:bg-white/[0.04]">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#7cc8f5] [&::-webkit-details-marker]:hidden">
-          <span className="font-medium">See the full list of core curriculum projects</span>
-          <span aria-hidden className="text-xl transition-transform duration-300 group-open:rotate-45">+</span>
+          <span className="sweep-coding font-medium">See the full list of core curriculum projects</span>
+          <span aria-hidden className="text-xl transition-transform duration-300 group-hover:-translate-x-1 group-open:rotate-45">+</span>
         </summary>
         <div className="overflow-x-auto px-5 pb-5">
           <table className="w-full min-w-[36rem] text-left text-sm">
@@ -178,10 +178,10 @@ function BiologyIntro() {
         <p className="mt-6 border-l-2 border-[#a78bfa]/60 pl-4">{inline(biologyHub.coursework.teaching, accent.biology)}</p>
       </div>
 
-      <details className="group mt-8 rounded-2xl border border-[#a78bfa]/30 bg-surface backdrop-blur-sm transition-all duration-300 hover:border-[#a78bfa]/80 hover:shadow-[0_0_40px_-6px_rgba(167,139,250,0.55)]">
+      <details className="group mt-8 rounded-2xl border border-[#a78bfa]/30 bg-surface backdrop-blur-sm transition-colors duration-300 hover:border-[#a78bfa]/55 hover:bg-white/[0.04]">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#a78bfa] [&::-webkit-details-marker]:hidden">
-          <span className="font-medium">See the full list of courses</span>
-          <span aria-hidden className="text-xl transition-transform duration-300 group-open:rotate-45">+</span>
+          <span className="sweep-biology font-medium">See the full list of courses</span>
+          <span aria-hidden className="text-xl transition-transform duration-300 group-hover:-translate-x-1 group-open:rotate-45">+</span>
         </summary>
         <div className="overflow-x-auto px-5 pb-5">
           <table className="w-full text-left text-sm">
