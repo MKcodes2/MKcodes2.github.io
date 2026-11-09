@@ -1,6 +1,7 @@
 import Page from '../components/Page'
 import Card from '../components/Card'
 import { biologyHub, codingHub, pagesByWorld, worlds, type World } from '../content'
+import { accent, inline } from '../richText'
 import certificateImg from '../assets/school42/credly.webp'
 import holyGraphImg from '../assets/school42/holy-graph.webp'
 import MediaView from '../components/MediaView'
@@ -22,20 +23,22 @@ export default function WorldHub({ world }: { world: World }) {
     <Page>
       <div className="pt-16" />
       <p className="label">{w.period}</p>
-      {/* Same type as the home slogan. The gradient sits on an inline span so descenders (the g) are not cut. */}
-      <h1 className="mt-4 text-5xl sm:text-7xl font-semibold leading-[1.05] tracking-[-0.045em]">
-        <span className={world === 'coding' ? 'hub-gradient-coding' : 'hub-gradient-biology'}>{w.label}</span>
-      </h1>
+      {world === 'coding' ? (
+        <>
+          <HubTitle world={world} />
+          <CodingIntro />
+        </>
+      ) : (
+        <BiologyIntro />
+      )}
 
-      {world === 'coding' ? <CodingIntro /> : <BiologyIntro />}
-
-      <h2 className="mt-16 mb-4 text-xl font-semibold">{world === 'coding' ? 'Projects' : 'Work'}</h2>
+      <h2 className="label !text-base !text-text mt-20 mb-6">{world === 'coding' ? 'Projects' : 'Selected Work'}</h2>
       <div className="grid gap-6 pb-24 sm:grid-cols-2">
         {featured.map((p) => (
-          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} large />
+          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} roomy />
         ))}
         {more.map((p) => (
-          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} />
+          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} roomy />
         ))}
       </div>
     </Page>
@@ -78,7 +81,7 @@ function CodingIntro() {
       </div>
 
       {/* Full project list, hidden until the visitor opens it. */}
-      <details className="group mt-10 rounded-2xl border border-[#7cc8f5]/30 bg-surface backdrop-blur-sm">
+      <details className="group mt-10 rounded-2xl border border-[#7cc8f5]/30 bg-surface backdrop-blur-sm transition-all duration-300 hover:border-[#7cc8f5]/80 hover:shadow-[0_0_40px_-6px_rgba(124,200,245,0.55)]">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#7cc8f5] [&::-webkit-details-marker]:hidden">
           <span className="font-medium">See the full list of core curriculum projects</span>
           <span aria-hidden className="text-xl transition-transform duration-300 group-open:rotate-45">+</span>
@@ -120,38 +123,92 @@ function CodingIntro() {
   )
 }
 
+// Same type as the home slogan. The gradient sits on an inline span so descenders (the g) are not cut.
+function HubTitle({ world }: { world: World }) {
+  return (
+    <h1 className="mt-4 text-5xl sm:text-7xl font-semibold leading-[1.05] tracking-[-0.045em]">
+      <span className={world === 'coding' ? 'hub-gradient-coding' : 'hub-gradient-biology'}>{worlds[world].label}</span>
+    </h1>
+  )
+}
+
 function BiologyIntro() {
   return (
-    // Text on the left, the lab showcase looping on the right: it starts level with the facts
-    // and ends at the right edge of the Work cards. Its height follows its width (16:9).
-    <div className="mt-6 grid items-start gap-10 lg:grid-cols-[minmax(0,42rem)_minmax(0,1fr)]">
-    <div className="space-y-6 text-muted">
-      <ul className="space-y-1 text-text">{biologyHub.facts.map((f) => <li key={f}>{f}</li>)}</ul>
-      {biologyHub.intro.map((p) => <p key={p}>{p}</p>)}
-      <div>
-        <h2 className="text-text font-semibold mb-2">Lab techniques</h2>
-        <div className="flex flex-wrap gap-2">
+    <>
+      {/* Title, facts and paragraph on the left; the lab showcase on the right, from the top of the title
+          to the end of the paragraph. On phones the video comes right after the paragraph. */}
+      <div className="grid gap-10 lg:grid-cols-2">
+        <div className="space-y-6 text-muted">
+          <HubTitle world="biology" />
+          <ul className="space-y-1 text-text">{biologyHub.facts.map((f) => <li key={f}>{f}</li>)}</ul>
+          {biologyHub.intro.map((p) => <p key={p}>{p}</p>)}
+        </div>
+        {/* On wide screens this cell takes the height of the text column, and the laptop is as tall as
+            that height allows without getting wider than the column (container query units). */}
+        <div className="flex items-center justify-end lg:mt-4 lg:[container-type:size]">
+          <div
+            className="relative w-full lg:w-[min(100cqw,calc(100cqh*1309/699))]"
+            style={{ aspectRatio: '1309 / 699' }}
+          >
+            <div className="absolute overflow-hidden bg-black" style={laptopScreen}>
+              <MediaView
+                media={{ video: showcaseVideo, poster: showcasePoster, alt: 'Slideshow of my laboratory work' }}
+                className="h-full object-cover"
+              />
+            </div>
+            <img src={laptopFrame} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />
+          </div>
+        </div>
+      </div>
+
+      {/* Spaced mono labels like the home page sections: silver here, purple for Coursework. */}
+      <div className="mt-16 text-muted">
+        <h2 className="label !text-base">Lab techniques</h2>
+        <div className="mt-6 flex flex-wrap gap-2">
           {biologyHub.techniques.map((t) => (
             <span key={t} className="rounded-full border border-line px-3 py-1 text-sm">{t}</span>
           ))}
         </div>
       </div>
-      <p>{biologyHub.labAssistant}</p>
-      <div className="rounded-3xl border border-line bg-surface p-6 backdrop-blur-sm">
-        <h2 className="text-text font-semibold">{biologyHub.teaching.heading}</h2>
-        <p className="mt-2">{biologyHub.teaching.body}</p>
+
+      {/* Plain text across the full width, then the full course list, hidden until opened. */}
+      <div className="mt-16 text-muted leading-relaxed">
+        <h2 className={`label !text-base ${accent.biology.heading}`}>{biologyHub.coursework.heading}</h2>
+        <p className="mt-6">{inline(biologyHub.coursework.intro, accent.biology)}</p>
+        <p className="mt-6 border-l-2 border-[#a78bfa]/60 pl-4">{inline(biologyHub.coursework.teaching, accent.biology)}</p>
       </div>
-    </div>
-    {/* The showcase plays inside a laptop frame, like the PongJam hero. */}
-    <div className="relative mx-auto w-full max-w-xl lg:mr-0" style={{ aspectRatio: '1309 / 699' }}>
-      <div className="absolute overflow-hidden bg-black" style={laptopScreen}>
-        <MediaView
-          media={{ video: showcaseVideo, poster: showcasePoster, alt: 'Slideshow of my laboratory work' }}
-          className="h-full object-cover"
-        />
-      </div>
-      <img src={laptopFrame} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />
-    </div>
-    </div>
+
+      <details className="group mt-8 rounded-2xl border border-[#a78bfa]/30 bg-surface backdrop-blur-sm transition-all duration-300 hover:border-[#a78bfa]/80 hover:shadow-[0_0_40px_-6px_rgba(167,139,250,0.55)]">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#a78bfa] [&::-webkit-details-marker]:hidden">
+          <span className="font-medium">See the full list of courses</span>
+          <span aria-hidden className="text-xl transition-transform duration-300 group-open:rotate-45">+</span>
+        </summary>
+        <div className="overflow-x-auto px-5 pb-5">
+          <table className="w-full text-left text-sm">
+            <thead>
+              <tr className="border-b border-line text-xs uppercase tracking-wider text-muted">
+                <th className="py-3 pr-4 font-medium">Course</th>
+                <th className="py-3 text-right font-medium">ECTS</th>
+              </tr>
+            </thead>
+            {biologyHub.coursework.groups.map((g) => (
+              <tbody key={g.title || 'core'}>
+                {g.title && (
+                  <tr>
+                    <td colSpan={2} className="pt-6 pb-2 font-mono text-xs uppercase tracking-[0.2em] text-[#a78bfa]">{g.title}</td>
+                  </tr>
+                )}
+                {g.courses.map(([name, ects]) => (
+                  <tr key={name} className="border-b border-line/60 align-top">
+                    <td className="py-2.5 pr-4 font-medium text-text">{name}</td>
+                    <td className="py-2.5 text-right text-muted whitespace-nowrap">{ects}</td>
+                  </tr>
+                ))}
+              </tbody>
+            ))}
+          </table>
+        </div>
+      </details>
+    </>
   )
 }

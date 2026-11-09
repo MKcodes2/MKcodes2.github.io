@@ -1,15 +1,11 @@
-import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Page from '../components/Page'
 import MediaView from '../components/MediaView'
 import NotFound from './NotFound'
 import { pagesByWorld, worlds, type Section, type World } from '../content'
+import { accent, inline } from '../richText'
 
 // Colours per world: cyan for Software Engineering, purple for Molecular Biology.
-const accent = {
-  coding: { frame: 'border-[#7cc8f5]/30', text: 'text-[#7cc8f5]', button: 'border-[#7cc8f5]/50 text-[#a6dcfa] hover:border-[#7cc8f5] hover:shadow-[0_0_30px_-8px_rgba(124,200,245,0.6)]', bar: 'border-[#7cc8f5]/60', heading: '!text-[#7cc8f5]' },
-  biology: { frame: 'border-[#a78bfa]/30', text: 'text-[#a78bfa]', button: 'border-[#a78bfa]/50 text-[#c4b1ff] hover:border-[#a78bfa] hover:shadow-[0_0_30px_-8px_rgba(167,139,250,0.6)]', bar: 'border-[#a78bfa]/60', heading: '!text-[#a78bfa]' },
-}
 
 // Where the screen sits inside the computer frame image (measured on the 1798 x 1176 px original:
 // screen at 36,37, 1726 x 955 px), as percentages, with a little extra so no gap shows under the bezel.
@@ -85,25 +81,6 @@ export default function Detail({ world }: { world: World }) {
   )
 }
 
-// A small subset of Markdown for body text: **bold**, _italic_, ==bold in the accent colour== and [text](url). Formats can be nested
-// (e.g. a link inside italics). Underscores inside words (like so_long) are left alone.
-const inlinePattern = /\*\*(.+?)\*\*|(?<![\w])_(.+?)_(?![\w])|\[([^\]]+)\]\(([^)\s]+)\)|==(.+?)==/g
-
-function inline(text: string, a: (typeof accent)[World]): ReactNode[] {
-  const out: ReactNode[] = []
-  let last = 0
-  for (const m of text.matchAll(inlinePattern)) {
-    const i = m.index ?? 0
-    if (i > last) out.push(text.slice(last, i))
-    if (m[1] !== undefined) out.push(<strong key={i} className="font-semibold text-text">{inline(m[1], a)}</strong>)
-    else if (m[2] !== undefined) out.push(<em key={i}>{inline(m[2], a)}</em>)
-    else if (m[5] !== undefined) out.push(<strong key={i} className={`font-semibold ${a.text}`}>{inline(m[5], a)}</strong>)
-    else out.push(<a key={i} href={m[4]} target="_blank" rel="noreferrer" className={`${a.text} underline-offset-4 hover:underline`}>{m[3]}</a>)
-    last = i + m[0].length
-  }
-  if (last < text.length) out.push(text.slice(last))
-  return out
-}
 
 function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
   return (

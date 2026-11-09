@@ -208,12 +208,50 @@ export const biologyHub = {
     'Final grade 9.22 / 10 ("Excellent"), top 3 of the cohort',
     'Thesis graded 10 / 10',
   ],
-  intro: ['TODO: a short paragraph on the degree and what drew you to molecular biology.'],
-  techniques: ['Cell culture', 'PCR / qPCR', 'DNA cloning', 'Adenoviral overexpression', 'Gel electrophoresis'],
-  labAssistant: 'Lab assistant, DUTH, Feb 2020 – Dec 2021. TODO: one or two lines on what you did.',
-  teaching: {
-    heading: 'Teaching Certification',
-    body: 'TODO: what the certification covered (teaching methodology, educational psychology, adult education, teaching practicum).',
+  intro: [
+    'My degree at DUTH combined extensive laboratory training with courses from genetics, biochemistry and genomics to bioinformatics and Molecular Neuroscience. Alongside it, I trained for two years in DNA cloning and spent my final year as an undergraduate researcher at BRFAA in Athens.',
+  ],
+  techniques: [
+    'Mammalian cell culture', 'Aseptic technique', 'Adenoviral overexpression', 'Primer design', 'RNA extraction',
+    'cDNA synthesis', 'Real-time PCR (qPCR)', 'qPCR data analysis', 'PCR', 'DNA cloning', 'Restriction digests',
+    'Ligation', 'Bacterial transformation', 'DNA isolation', 'Gel electrophoresis & electroelution',
+    'Lab notebook documentation', 'Recombinant DNA workflows', 'Cryopreservation',
+  ],
+  coursework: {
+    heading: 'Coursework',
+    // **bold**, _italic_ (course titles) and ==purple== as on the detail pages.
+    intro: 'The degree started from the **STEM fundamentals**, such as _Physics_, _Inorganic_, _Organic_ and _Physical Chemistry_ and _Biostatistics_, then moved into the core of the field: _Biochemistry_, _Genetics_, _Cellular_ and _Molecular Biology_, with **hands-on laboratory courses** throughout. Later years added _Genomics_, _Proteomics_, _Bioinformatics_ and _Systems Biology_, up to **advanced courses** such as _Molecular Neurobiology_, _Developmental Biology_ and _Molecular Immunology_. The full list of courses is below.',
+    teaching: 'The degree also included a ==Certificate of Pedagogical and Teaching Competence==, from eight courses including _Pedagogics_, _Counseling & Educational Psychology_, _Organizational Psychology_, _Adult Education_ and _Teaching Methodology_, with two teaching practicums: microteaching and a school placement.',
+    // Course titles and ECTS as on the official English transcript. Regular courses in the order
+    // they were completed; the two certificate groups at the end.
+    groups: [
+      { title: '', courses: [
+        ['Physics for Biological Sciences', 5], ['Inorganic Chemistry', 5], ['Introduction to Biology', 5],
+        ['Organic Chemistry', 5], ['Laboratory Course I', 5], ['Laboratory Course II', 5], ['English I', 2],
+        ['Molecular Biology I', 6], ['Physical Chemistry and Elements of Biophysics', 5], ['Biochemistry I', 4],
+        ['Genetics I', 4], ['Introduction to Organismal Biology', 4], ['Molecular Biology II', 5],
+        ['Molecular Microbiology', 4], ['Cellular Biology', 5], ['Biochemistry II', 5],
+        ['Introduction to Molecular Biology Techniques', 4], ['English II', 2], ['Laboratory Course III', 5],
+        ['Laboratory Course IV', 5], ['Genetics II', 4], ['Biostatistics', 3], ['Physiology', 5],
+        ['Gene Expression and Cell Signalling', 5], ['Histology', 3], ['Principles of Laboratory Animal Management', 3],
+        ['Radiobiology', 3], ['Molecular Immunology', 5], ['Developmental Biology', 4],
+        ['Population and Evolutionary Genetics', 5], ['Methods in Molecular Biology', 5],
+        ['Modeling of Physical-Chemical Processes in Biology', 3], ['Laboratory Course VI', 5],
+        ['Applied Biotechnology', 4], ['Molecular Structure and Function I', 4], ['Regulation of Cell Function', 4],
+        ['Genomics', 4], ['Forensic Genetics', 3], ['Advanced Molecular Biology Techniques', 4], ['Proteomics', 3],
+        ['Human Genetics', 5], ['Applications of Molecular Biology in Medical Sciences', 5],
+        ['Molecular Neurobiology', 4], ['Systems Biology', 3],
+      ] },
+      { title: 'Courses for the informatics certificate', courses: [
+        ['Introduction to Computational Biology', 5], ['Advanced Themes in Computational Biology', 3],
+        ['Bioinformatics', 5], ['Advanced Themes in Bioinformatics', 3],
+      ] },
+      { title: 'Courses for the pedagogical & teaching certificate', courses: [
+        ['Counseling & Educational Psychology', 3], ['Pedagogics', 2], ['Teaching Methodology', 5],
+        ['Teaching Practical Course I', 6], ['Career Development of Bioscientists', 3], ['Teaching Practical Course II', 3],
+        ['Adult Education', 3], ['Organizational Psychology', 3],
+      ] },
+    ] as { title: string; courses: [string, number][] }[],
   },
 }
 

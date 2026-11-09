@@ -5,7 +5,8 @@ interface CardProps {
   title: string
   text: string
   eyebrow?: string
-  large?: boolean
+  large?: boolean // bigger title and more space inside
+  roomy?: boolean // more space inside, normal title size
   accent?: 'biology' | 'coding' // colour of the border and the hover glow
   image?: string // optional illustration shown to the left of the text
 }
@@ -17,11 +18,11 @@ const tone = {
   coding: 'border-[#7cc8f5]/45 hover:border-[#7cc8f5]/80 hover:shadow-[0_0_40px_-6px_rgba(124,200,245,0.55)]',
 }
 
-export default function Card({ to, title, text, eyebrow, large, accent, image }: CardProps) {
+export default function Card({ to, title, text, eyebrow, large, roomy, accent, image }: CardProps) {
   return (
     <Link
       to={to}
-      className={`group flex h-full ${image ? 'items-center' : 'items-start'} gap-6 rounded-3xl border bg-surface backdrop-blur-sm p-6 transition-all duration-300 hover:bg-white/[0.05] ${accent ? tone[accent] : 'border-line hover:border-lavender/60'} ${large ? 'sm:p-10 sm:gap-8' : ''}`}
+      className={`group flex h-full ${image ? 'items-center' : 'items-start'} gap-6 rounded-3xl border bg-surface backdrop-blur-sm p-6 transition-all duration-300 hover:bg-white/[0.05] ${accent ? tone[accent] : 'border-line hover:border-lavender/60'} ${large || roomy ? 'sm:p-10 sm:gap-8' : ''}`}
     >
       {image && (
         // Fixed-size box, image fitted inside: the tall DNA and the wider computer take the
