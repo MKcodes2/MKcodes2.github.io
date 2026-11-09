@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import Page from '../components/Page'
 import MediaView from '../components/MediaView'
+import PageStack from '../components/PageStack'
 import NotFound from './NotFound'
 import { pagesByWorld, worlds, type Section, type World } from '../content'
 import { accent, inline } from '../richText'
@@ -25,15 +26,25 @@ export default function Detail({ world }: { world: World }) {
   return (
     <Page>
       <div className="pt-16" />
-      <Link to={base} className="text-sm text-muted hover:text-text">← {world === 'coding' ? 'Coding projects' : worlds[world].label}</Link>
+      <Link to={base} className="text-sm text-muted hover:text-text">← {world === 'coding' ? 'Coding projects' : 'Molecular Biology work'}</Link>
       {/* The gradient sits on an inline span so descenders are not cut, as on the hub pages. */}
       {/* Wide screens: text on the left, hero video on the right. Phones: the video stacks under the buttons. */}
-      <div className={page.hero ? 'mt-4 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-4'}>
+      {/* Half and half for a video; 60/40 for a page stack, which is portrait and needs less width. */}
+      <div className={page.heroPages ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
+        : page.hero ? 'mt-4 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-4'}>
         <div>
           {/* The gradient sits on an inline span so descenders are not cut, as on the hub pages. */}
+          {page.kicker && <p className="label mb-4">{page.kicker}</p>}
           <h1 className="text-5xl sm:text-6xl font-semibold leading-[1.1] tracking-[-0.04em]">
             <span className={world === 'coding' ? 'hub-gradient-coding' : 'hub-gradient-biology'}>{page.title}</span>
           </h1>
+          {/* The formal title, as a small clarification in the same quote style as the hub's certificate line. */}
+          {page.officialTitle && (
+            <div className={`mt-5 space-y-1 border-l-2 pl-3 text-sm text-muted ${a.bar}`}>
+              <p>Official title: <span className="italic text-text/80">{page.officialTitle}</span></p>
+              {page.grade && <p>Grade: <span className="text-text/80">{page.grade}</span></p>}
+            </div>
+          )}
           <p className="mt-4 text-lg text-muted max-w-2xl text-pretty">{page.summary}</p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {page.meta.map((m) => <li key={m} className="rounded-full border border-line px-3 py-1 text-sm text-muted">{m}</li>)}
@@ -64,6 +75,13 @@ export default function Detail({ world }: { world: World }) {
             <MediaView media={page.hero} />
           </div>
         )}
+        {/* On wide screens the stack is exactly as tall as the text beside it: top level with the line above
+            the title, bottom level with the last row of pills (the cell is a size container, see index.css). */}
+        {page.heroPages && (
+          <div className="page-stack-fit lg:self-stretch lg:[container-type:size]">
+            <PageStack pages={page.heroPages} href={page.heroHref} />
+          </div>
+        )}
       </div>
 
       <article className="mt-20 space-y-16">
@@ -91,6 +109,24 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
         <div className="mt-8 space-y-3 text-muted leading-relaxed">{s.body.map((b) => <p key={b}>{inline(b, a)}</p>)}</div>
       )}
 
+      {/* A recording with the steps numbered beside it: 60/40 on wide screens, the steps under the video on phones.
+          The steps column is as tall as the video; the steps spread out to fill it. */}
+      {s.media && s.points && (
+        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
+          <div className="soft-edges self-start">
+            <MediaView media={s.media} />
+          </div>
+          <ol className="flex flex-col justify-between gap-3">
+            {s.points.map((p, i) => (
+              <li key={p.title}>
+                <h3 className="font-semibold text-text"><span className={`mr-2 font-mono ${a.text}`}>{i + 1}.</span>{p.title}</h3>
+                <p className="mt-1 text-sm text-muted leading-relaxed">{inline(p.text, a)}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       {s.features && (
         <div className="mt-8 grid gap-6 sm:grid-cols-2">
           {s.features.map((f) => (
@@ -108,8 +144,8 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
       )}
 
       {/* Decision points stacked one under the other, full width like the other sections. */}
-      {s.points && s.pointsHeading && <h3 className="mt-12 text-lg font-semibold text-text">{s.pointsHeading}</h3>}
-      {s.points && (
+      {!s.media && s.points && s.pointsHeading && <h3 className="mt-12 text-lg font-semibold text-text">{s.pointsHeading}</h3>}
+      {!s.media && s.points && (
         <div className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} space-y-8`}>
           {s.points.map((p) => (
             <div key={p.title} className={`border-l-2 pl-4 ${a.bar}`}>

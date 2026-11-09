@@ -2,6 +2,12 @@
 // Anything marked TODO is waiting for Mary Kate's own words or details.
 
 import pjSignupVideo from './assets/pongjam/registration.mp4'
+import thesisPage1 from './assets/molecularBiology/thesis-page-1.webp'
+import thesisWorkflowVideo from './assets/molecularBiology/thesis-workflow.mp4'
+import thesisWorkflowPoster from './assets/molecularBiology/thesis-workflow-poster.webp'
+import thesisPage2 from './assets/molecularBiology/thesis-page-2.webp'
+import thesisPage3 from './assets/molecularBiology/thesis-page-3.webp'
+import thesisPage4 from './assets/molecularBiology/thesis-page-4.webp'
 import pjSignupPoster from './assets/pongjam/registration-poster.webp'
 import pjComputerFrame from './assets/pongjam/computer-frame.webp'
 import pjModesVideo from './assets/pongjam/game-modes.mp4'
@@ -43,6 +49,7 @@ export interface Section {
   features?: { title: string; text: string; media: Media }[] // tiles with a recording each
   points?: { title: string; text: string }[] // short titled paragraphs, e.g. design decisions
   pointsHeading?: string // optional sub-heading shown above the points
+  media?: Media // a recording shown at 60% width, with the points numbered beside it
 }
 
 export interface DetailPage {
@@ -50,10 +57,16 @@ export interface DetailPage {
   world: World
   title: string
   summary: string // one line, used on cards
-  meta: string[] // small facts under the title (team size, stack, dates)
+  meta: string[] // small facts under the title (team size, stack, dates); the first is the card's category unless category is set
+  category?: string // the card's category on the hub, when it differs from meta[0]
+  kicker?: string // small line above the title (place, dates)
+  officialTitle?: string // the formal title, shown under the page title as a clarification
+  grade?: string // shown on the same clarification line as the official title
   featured?: boolean // full case study vs shorter page
   hero?: Media // large recording under the title
   heroFrame?: string // optional device image (transparent screen) the hero plays inside
+  heroPages?: string[] // page images shown as a stack, turning one after another (instead of a hero video)
+  heroHref?: string // optional link the hero opens when clicked
   sections: Section[]
   links: Link[]
 }
@@ -362,31 +375,31 @@ export const pages: DetailPage[] = [
     world: 'biology',
     title: 'Gene regulatory networks in cancer cells',
     summary: 'My BSc thesis: does the transcription factor Prox1, which may act as a tumour suppressor in breast cancer, also affect the genes that repair DNA? I overexpressed Prox1 in two breast cancer cell lines and measured 15 repair genes with real-time PCR.',
-    meta: ['Undergraduate research', 'BRFAA, Athens', 'Mar 2022 - Feb 2023', 'Graded 10 / 10'],
+    category: 'Undergraduate research',
+    kicker: 'BRFAA, Athens \u00b7 Mar 2022 - Feb 2023',
+    officialTitle: 'Study of Gene Regulatory Networks Affecting Metabolism and DNA Repair in Cancer Cells',
+    grade: '10/10',
+    meta: ['Mammalian cell culture', 'MCF7 & MDA-MB-231 cells', 'Adenoviral overexpression', 'Primer design', 'RNA extraction', 'cDNA synthesis', 'Real-time PCR (qPCR)'],
     featured: true,
-    // TODO: a slideshow or single image of the excerpt pages (title, contents, abstract).
-    hero: { alt: 'the pages of my thesis excerpt' },
+    heroPages: [thesisPage1, thesisPage2, thesisPage3, thesisPage4],
+    heroHref: 'https://drive.google.com/file/d/1-mcoudLMc905iLluqNW2RVsfdFP0wpIC/view?usp=sharing',
     sections: [
       {
         heading: 'The question',
         body: [
-          'Prox1 is a transcription factor known mostly for its role in development and cell fate. Earlier work in the lab, and the literature, pointed to a **tumour-suppressing** role in breast cancer. I asked whether it might also act indirectly, through the **DNA-repair** systems that keep the genome stable: a link that had not been studied.',
+          '**Prox1** is a transcription factor known mostly for its role in development and cell fate. Earlier work in the lab, and the literature, pointed to a **tumour-suppressing** role in breast cancer. I asked whether it might also act indirectly, through the **DNA-repair** systems that keep the genome stable: a link that had not been studied.',
           'I tested this in two human breast cancer cell lines that differ in a way that matters here: _MCF7_, which is oestrogen-receptor positive, and _MDA-MB-231_, which is triple-negative.',
         ],
       },
       {
         heading: 'What I did',
         body: [],
+        media: { video: thesisWorkflowVideo, poster: thesisWorkflowPoster, alt: 'Animated summary of the workflow, from choosing the genes to the real-time PCR results' },
         points: [
           { title: 'Choosing the genes', text: 'From the lab\u2019s earlier RNA-seq of mouse Neuro2A cells overexpressing Prox1, I selected 13 DNA-repair genes whose expression changed most, added two further genes of interest (_SMARCA1_ and _SMAD3_), and designed real-time PCR primers for all 15.' },
           { title: 'Cell culture', text: 'I cultured MCF7 and MDA-MB-231 cells, including thawing, splitting and cryopreservation, and HEK cells to prepare the adenovirus.' },
           { title: 'Overexpressing Prox1', text: 'A three-day infection with an adenovirus carrying either Prox1 or GFP as the control, checked under a fluorescence microscope before I went on.' },
           { title: 'Measuring the genes', text: 'RNA extraction, cDNA synthesis and real-time PCR for all 15 genes, three biological replicates per cell line, analysed with the \u0394\u0394Cq method.' },
-        ],
-        features: [
-          // TODO: her own fluorescence microscopy photographs (Figure 15 of the thesis).
-          { title: 'MCF7', text: 'Cells expressing GFP three days after infection with the control adenovirus.', media: { alt: 'MCF7 cells under the fluorescence microscope' } },
-          { title: 'MDA-MB-231', text: 'The same check in the triple-negative line, confirming the infection worked.', media: { alt: 'MDA-MB-231 cells under the fluorescence microscope' } },
         ],
       },
       {

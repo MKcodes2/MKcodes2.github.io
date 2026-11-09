@@ -35,10 +35,10 @@ export default function WorldHub({ world }: { world: World }) {
       <h2 className="label !text-base !text-text mt-20 mb-6">{world === 'coding' ? 'Projects' : 'Selected Work'}</h2>
       <div className="grid gap-6 pb-24 sm:grid-cols-2">
         {featured.map((p) => (
-          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} roomy />
+          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.category ?? p.meta[0]} accent={world} roomy />
         ))}
         {more.map((p) => (
-          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.meta[0]} accent={world} roomy />
+          <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.category ?? p.meta[0]} accent={world} roomy />
         ))}
       </div>
     </Page>

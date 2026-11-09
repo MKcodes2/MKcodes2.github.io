@@ -118,6 +118,40 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
 .group:hover .sweep-biology, .group:hover .sweep-coding,
 .group:focus-visible .sweep-biology, .group:focus-visible .sweep-coding { background-position: 0 0; }
 
+/* Feathered edges for media on a black background: it fades into the page instead of sitting in a frame. */
+.soft-edges {
+  --feather: 18px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+  mask-composite: intersect;
+}
+
+/* Page stack (thesis hero): see PageStack.tsx. The stack stays still; the top sheet cross-dissolves
+   from one page to the next. Each page shows for 3.2 s of the cycle, with a 0.8 s dissolve. */
+.page-stack { --sheet: 6px; position: relative; width: min(19rem, 72%); margin: 0 auto calc(3 * var(--sheet)); }
+/* Wide screens: the height is the cell's height (100cqh), sheets included; the width follows the page shape. */
+@media (min-width: 64rem) {
+  .page-stack-fit .page-stack { width: calc((100cqh - 3 * var(--sheet)) * 1190 / 1684); }
+}
+.page-stack-sheet, .page-stack-top { background: #f1f0ec; box-shadow: 0 14px 30px -10px rgb(0 0 0 / 0.7), 0 0 0 1px rgb(0 0 0 / 0.25); }
+.page-stack-sheet { position: absolute; inset: 0; }
+.page-stack-top { position: relative; }
+.page-stack-top img { display: block; width: 100%; height: auto; filter: brightness(0.93); user-select: none; }
+.page-stack-top img + img { position: absolute; inset: 0; }
+.page-stack-top img { opacity: 0; animation: page-stack-fade var(--cycle, 12.8s) linear infinite; }
+@keyframes page-stack-fade {
+  0% { opacity: 0; animation-timing-function: ease-in-out; }
+  6.25%, 25% { opacity: 1; animation-timing-function: ease-in-out; }
+  31.25%, 100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-stack-top img { animation: none; }
+  .page-stack-top img:first-child { opacity: 1; }
+}
+
 /* "View my Work" (white button): on hover a bright brand gradient (same colours as the navbar sweep) fades in behind the dark text. */
 .fill-hover { position: relative; isolation: isolate; overflow: hidden; }
 .fill-hover::before {
