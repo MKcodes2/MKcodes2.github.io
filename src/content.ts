@@ -49,6 +49,7 @@ export interface Section {
   features?: { title: string; text: string; media: Media }[] // tiles with a recording each
   points?: { title: string; text: string }[] // short titled paragraphs, e.g. design decisions
   pointsHeading?: string // optional sub-heading shown above the points
+  pointsStyle?: 'list' // show the points as a list with ‣ markers instead of side bars
   media?: Media // a recording shown at 60% width, with the points numbered beside it
 }
 
@@ -405,12 +406,14 @@ export const pages: DetailPage[] = [
       {
         heading: 'What I found',
         body: [
-          'Eight of the 15 genes changed significantly in each cell line, but the two lines agreed on only five: ==XPA, LIG4, PIN4, WEE1 and DDIT3==, all higher when Prox1 was overexpressed. Only the first three matched the direction seen in the mouse data.',
+          'Eight of the 15 genes changed significantly in each cell line, and five of them rose in both when Prox1 was overexpressed: ==XPA, LIG4, PIN4, WEE1 and DDIT3==. Prox1 could regulate them directly, by binding their regulatory regions, or indirectly, through the pathways and gene networks it takes part in.',
         ],
+        pointsStyle: 'list',
         points: [
-          { title: 'The clearest effect points the other way', text: 'LIG4 rose the most in both lines. High LIG4 has been linked to more aggressive breast cancer, because efficient repair helps tumour cells survive chemotherapy and radiotherapy. WEE1, also higher in both lines, is generally treated as an oncogene in breast cancer.' },
-          { title: 'Some differences follow the receptor', text: 'ATM and PRKDC dropped only in the ER-positive MCF7 cells. Both are connected to oestrogen-receptor signalling, which may be why the triple-negative line behaved differently.' },
-          { title: 'No safe conclusion', text: 'So the results do not support a simple story. They deepen the **dual role** already described for Prox1 rather than settling it, and they do not establish a link between Prox1 and DNA repair.' },
+          { title: 'Repair is not a simple story', text: 'Efficient DNA repair keeps the genome stable and is generally thought to protect against cancer. In some contexts, though, it can also help tumour cells survive treatment. LIG4, which rose the most, and WEE1 are two examples: high levels of both have been linked to harder-to-treat breast cancer.' },
+          { title: 'Signs of a dual role', text: 'The literature already describes Prox1 as tumour-suppressing in some settings and tumour-promoting in others. My results add new detail to this **dual role** rather than settling it.' },
+          { title: 'The receptor may matter', text: 'Breast cancer is very heterogeneous, and Prox1 interacts with oestrogen-receptor signalling. This could explain why ATM and PRKDC dropped only in the ER-positive MCF7 cells and not in the triple-negative MDA-MB-231.' },
+          { title: 'A promising, open question', text: 'A firm link between Prox1 and DNA repair cannot be drawn yet. Prox1 remains a potentially valuable prognostic marker, and understanding how it works could help improve breast cancer treatment.' },
         ],
       },
       {

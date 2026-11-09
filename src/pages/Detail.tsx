@@ -145,7 +145,21 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
 
       {/* Decision points stacked one under the other, full width like the other sections. */}
       {!s.media && s.points && s.pointsHeading && <h3 className="mt-12 text-lg font-semibold text-text">{s.pointsHeading}</h3>}
-      {!s.media && s.points && (
+      {/* Findings as a plain list: a ‣ marker in the accent colour, the title, then the text under it. */}
+      {!s.media && s.points && s.pointsStyle === 'list' && (
+        <ul className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} space-y-6`}>
+          {s.points.map((p) => (
+            <li key={p.title} className="flex gap-3">
+              <span aria-hidden className={`flex h-6 shrink-0 items-center text-[1.75rem] leading-none ${a.text}`}><span className="-translate-y-[3px]">‣</span></span>
+              <div>
+                <h3 className="font-semibold text-text leading-6">{p.title}</h3>
+                <p className="mt-1.5 text-muted leading-relaxed text-pretty">{inline(p.text, a)}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {!s.media && s.points && s.pointsStyle !== 'list' && (
         <div className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} space-y-8`}>
           {s.points.map((p) => (
             <div key={p.title} className={`border-l-2 pl-4 ${a.bar}`}>
