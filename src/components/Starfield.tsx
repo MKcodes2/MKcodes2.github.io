@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react'
 const MODE: 'letters' | 'dots' = 'letters'
 
 // Letter sizes in px: most letters are near MIN_SIZE (far away), a few reach MAX_SIZE (close).
-const MIN_SIZE = 6
+const MIN_SIZE = 5
 const MAX_SIZE = 11
 
 const BIO = { chars: ['A', 'T', 'C', 'G'], rgb: '167, 139, 250' } // purple
@@ -37,17 +37,17 @@ export default function Starfield() {
       canvas.height = h * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       // Letters take more room than dots, so there are fewer of them.
-      const count = Math.round((w * h) / (MODE === 'letters' ? 5000 : 2500))
-      // Everything drifts to the right, like a gentle wind. Closer stars are bigger,
-      // brighter and faster, which gives a sense of depth.
+      const count = Math.round((w * h) / (MODE === 'letters' ? 3000 : 2500))
+      // Everything drifts to the right, like a gentle wind. Perspective: size and speed both
+      // follow depth, so the big (close) letters move clearly faster than the small (far) ones.
       stars = Array.from({ length: count }, () => {
-        const depth = Math.random() ** 3 // most far away, a few close
         const bright = Math.random() < 0.03
+        const depth = bright ? 0.85 + Math.random() * 0.15 : Math.random() ** 2.5 // most far away, a few close
         const set = Math.random() < 0.5 ? BIO : CODE
         return {
           x: Math.random() * w,
           y: Math.random() * h,
-          vx: 0.05 + depth * 0.55 + (bright ? 0.4 : 0),
+          vx: 0.02 + depth * 0.5,
           vy: (Math.random() - 0.5) * 0.05,
           a: bright ? 0.8 : 0.12 + depth * 0.4,
           tw: Math.random() * Math.PI * 2,
@@ -70,7 +70,7 @@ export default function Starfield() {
         const alpha = s.a * (0.6 + 0.4 * Math.sin(s.tw))
         ctx.fillStyle = `rgba(${s.rgb}, ${alpha})`
         if (MODE === 'letters') {
-          const size = s.bright ? MAX_SIZE + 1 : MIN_SIZE + s.depth * (MAX_SIZE - MIN_SIZE)
+          const size = MIN_SIZE + s.depth * (MAX_SIZE - MIN_SIZE)
           ctx.font = `500 ${size.toFixed(1)}px "JetBrains Mono", ui-monospace, monospace`
           ctx.fillText(s.char, s.x, s.y)
         } else {

@@ -3,6 +3,14 @@ import Card from '../components/Card'
 import { biologyHub, codingHub, pagesByWorld, worlds, type World } from '../content'
 import certificateImg from '../assets/school42/credly.webp'
 import holyGraphImg from '../assets/school42/holy-graph.webp'
+import MediaView from '../components/MediaView'
+import showcaseVideo from '../assets/molecularBiology/showcase.mp4'
+import showcasePoster from '../assets/molecularBiology/showcase-poster.webp'
+import laptopFrame from '../assets/molecularBiology/laptop-frame.webp'
+
+// Where the screen sits inside the laptop frame image (1309 x 699 px, widened so the screen is 16:9;
+// screen at 152,52, 999 x 562 px), as percentages, with about 1 px extra so no gap shows under the bezel.
+const laptopScreen = { left: '11.55%', top: '7.35%', width: '76.45%', height: '80.6%' }
 
 export default function WorldHub({ world }: { world: World }) {
   const w = worlds[world]
@@ -114,7 +122,10 @@ function CodingIntro() {
 
 function BiologyIntro() {
   return (
-    <div className="mt-6 max-w-2xl space-y-6 text-muted">
+    // Text on the left, the lab showcase looping on the right: it starts level with the facts
+    // and ends at the right edge of the Work cards. Its height follows its width (16:9).
+    <div className="mt-6 grid items-start gap-10 lg:grid-cols-[minmax(0,42rem)_minmax(0,1fr)]">
+    <div className="space-y-6 text-muted">
       <ul className="space-y-1 text-text">{biologyHub.facts.map((f) => <li key={f}>{f}</li>)}</ul>
       {biologyHub.intro.map((p) => <p key={p}>{p}</p>)}
       <div>
@@ -130,6 +141,17 @@ function BiologyIntro() {
         <h2 className="text-text font-semibold">{biologyHub.teaching.heading}</h2>
         <p className="mt-2">{biologyHub.teaching.body}</p>
       </div>
+    </div>
+    {/* The showcase plays inside a laptop frame, like the PongJam hero. */}
+    <div className="relative mx-auto w-full max-w-xl lg:mr-0" style={{ aspectRatio: '1309 / 699' }}>
+      <div className="absolute overflow-hidden bg-black" style={laptopScreen}>
+        <MediaView
+          media={{ video: showcaseVideo, poster: showcasePoster, alt: 'Slideshow of my laboratory work' }}
+          className="h-full object-cover"
+        />
+      </div>
+      <img src={laptopFrame} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />
+    </div>
     </div>
   )
 }
