@@ -159,3 +159,9 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
   background: linear-gradient(90deg, #b9a3ff 0%, #9fb0ff 50%, #8cd0f7 100%); opacity: 0; transition: opacity 0.3s ease;
 }
 .fill-hover:hover::before, .fill-hover:focus-visible::before { opacity: 1; }
+
+/* Slideshow (presentations): see Slideshow.tsx. Each new slide fades in; in full screen the slide fills the screen. */
+.slide-fade { animation: slide-fade 0.35s ease-out; }
+@keyframes slide-fade { from { opacity: 0; } to { opacity: 1; } }
+.slideshow:fullscreen { aspect-ratio: auto !important; border-radius: 0; }
+@media (prefers-reduced-motion: reduce) { .slide-fade { animation: none; } }

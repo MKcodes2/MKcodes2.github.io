@@ -21,6 +21,11 @@ import pjGameVideo from './assets/pongjam/game.mp4'
 import pjGamePoster from './assets/pongjam/game-poster.webp'
 import pjSettingsVideo from './assets/pongjam/user-settings.mp4'
 import pjSettingsPoster from './assets/pongjam/user-settings-poster.webp'
+import labBookCover from './assets/presentations/lab-book-cover.webp'
+import snaresProteinsVideo from './assets/presentations/snares-video/proteins.mp4'
+import snaresProteinsStart from './assets/presentations/snares-video/proteins-start.webp'
+import snaresFusionVideo from './assets/presentations/snares-video/fusion.mp4'
+import snaresFusionStart from './assets/presentations/snares-video/fusion-start.webp'
 import logo42 from './assets/logos/42white.webp'
 import logoNsrf from './assets/logos/eu-nsrf.webp'
 import logoHarvard from './assets/logos/harvard.webp'
@@ -29,6 +34,23 @@ import logoPanhellenics from './assets/logos/panhellenics.webp'
 import logoEuroscola from './assets/logos/euroscola.webp'
 
 export type World = 'coding' | 'biology'
+
+// Presentation slides, one folder per presentation (01.webp, 02.webp, ...), cut from the4presentations_edited_pdfversion.pdf.
+// Each ends with its "..." slide on purpose: it signals that teammates' slides are left out.
+const slideFiles = import.meta.glob('./assets/presentations/{epigenetics,snares,nobel,epidemic}/*.webp', { eager: true, import: 'default' }) as Record<string, string>
+const slidesOf = (deck: string): Slide[] =>
+  Object.keys(slideFiles).filter((k) => k.includes(`/presentations/${deck}/`)).sort().map((k) => slideFiles[k])
+
+// A slide is a still image, or a recording of its animations that plays once and stops on the finished
+// slide. `poster` is the recording's first frame; `still` is the finished slide, shown instead of the
+// recording to visitors who prefer reduced motion.
+export type Slide = string | { video: string; poster: string; still: string }
+
+// The SNARE slides 11 and 12 are recordings: their animations build the figures piece by piece.
+const snareSlides = slidesOf('snares').map((s, i): Slide =>
+  i === 10 ? { video: snaresProteinsVideo, poster: snaresProteinsStart, still: s as string }
+  : i === 11 ? { video: snaresFusionVideo, poster: snaresFusionStart, still: s as string }
+  : s)
 
 export interface Link {
   label: string
@@ -51,6 +73,18 @@ export interface Section {
   pointsHeading?: string // optional sub-heading shown above the points
   pointsStyle?: 'list' // show the points as a list with ‣ markers instead of side bars
   media?: Media // a recording shown at 60% width, with the points numbered beside it
+  decks?: Deck[] // presentations, each a slideshow with a short description beside it
+}
+
+// One presentation: its slides as a slideshow, with a small context line, a title and a short description.
+export interface Deck {
+  title: string
+  context: string // course and date, small line above the title
+  text: string
+  slides: Slide[]
+  alt: string
+  ratio?: string // width / height of the slides, when not 16 / 9
+  notes?: string[] // short side comments under the description
 }
 
 export interface DetailPage {
@@ -63,6 +97,7 @@ export interface DetailPage {
   kicker?: string // small line above the title (place, dates)
   officialTitle?: string // the formal title, shown under the page title as a clarification
   grade?: string // shown on the same clarification line as the official title
+  notes?: string[] // short notes under the summary, as a bulleted side note
   featured?: boolean // full case study vs shorter page
   hero?: Media // large recording under the title
   heroFrame?: string // optional device image (transparent screen) the hero plays inside
@@ -429,28 +464,72 @@ export const pages: DetailPage[] = [
   {
     slug: 'presentations',
     world: 'biology',
-    title: 'Presentations and lab book cover',
-    summary: 'Five molecular biology presentations I researched and designed, and the cover I drew for my own lab notebook. The originals are in Greek.',
-    meta: ['Scientific communication & design', 'DUTH', '2018 - 2023'],
+    title: 'Presentations & lab book cover',
+    summary: 'Slides from four team presentations I gave during my BSc studies at DUTH, and the cover I personally designed for my own physical lab book, a handwritten laboratory notebook of over 160 pages, as an example of scientific communication & design.',
+    notes: [
+      '==Only the slides I designed are included==, and ++not++ the entire team presentation. Content has been selectively curated to showcase visual communication rather than complete narrative flows.',
+      'Cover slides were adapted to English for this page, but the remaining content is primarily in Greek.',
+    ],
+    category: 'Scientific communication & design',
+    kicker: 'DUTH \u00b7 2020 - 2021',
+    meta: ['Scientific storytelling', 'Visual communication', 'Slide design', 'Graphic design', 'Public speaking', 'Microsoft PowerPoint'],
     sections: [
       {
         heading: 'Presentations',
-        body: ['TODO: two or three lines on how you choose what to show and how you design a slide.'],
-        features: [
-          // TODO: one image per presentation, plus an English title and two lines each.
-          { title: 'Breast cancer', text: 'TODO', media: { alt: 'a slide from the breast cancer presentation' } },
-          { title: 'Epigenetics', text: 'TODO', media: { alt: 'a slide from the epigenetics presentation' } },
-          { title: 'SNAREs', text: 'TODO', media: { alt: 'a slide from the SNARE presentation' } },
-          { title: 'Nobel Prize', text: 'TODO', media: { alt: 'a slide from the Nobel Prize presentation' } },
-          { title: 'Epidemic modelling', text: 'TODO', media: { alt: 'a slide from the epidemic modelling presentation' } },
+        body: [
+          'From early in my degree, creating presentations and scientific visuals that explain knowledge in the clearest, most engaging and interactive way was a part I enjoyed a lot. I wanted every listener to be able to follow me, so I took every chance to present, in required and voluntary assignments alike. These four are a small selection.',
+          'In the original talks, every element was animated to appear in step with my explanation. To keep this page light, each slide is shown in its finished state, except for two examples in the SNAREs presentation (slides 11 and 12), which play with their full animations.',
+        ],
+        decks: [
+          {
+            title: 'Epigenetic Analysis in Forensics',
+            context: 'Forensic Genetics \u00b7 May 2021',
+            text: 'My part covered DNA methylation profiling: how bisulfite treatment works, and the techniques that detect methylation, from microarrays and sequencing to quantitative PCR and Ms-SNuPE.',
+            slides: slidesOf('epigenetics'),
+            alt: 'Slides from the epigenetics in forensics presentation',
+          },
+          {
+            title: 'The Role of SNAREs in Synaptic Transmission',
+            context: 'Molecular Neurobiology \u00b7 May 2020',
+            text: 'How SNARE proteins are classified and built, how the SNARE complex forms and comes apart, and how it drives the membrane fusion that releases neurotransmitters.',
+            slides: snareSlides,
+            notes: [
+              'One of the hardest presentations I have prepared. Understanding SNAREs, membrane fusion and what every single protein does took a lot of paper reading, and it is still one of my favourites.',
+              '**Fun fact:** it was also one of my first presentations, made in PowerPoint 2007, the only version I had back then. Today I would redesign much of it, but I have kept it as it was, as a reminder of how my slide design started.',
+            ],
+            alt: 'Slides from the SNARE presentation',
+          },
+          {
+            title: 'Nobel Prize in Chemistry 2015',
+            context: 'Genomics \u00b7 Mar 2021',
+            text: 'An overview of Tomas Lindahl, Aziz Sancar and Paul Modrich and the DNA-repair mechanisms they mapped: base excision, nucleotide excision and mismatch repair.',
+            slides: slidesOf('nobel'),
+            alt: 'Slides from the Nobel Prize in Chemistry 2015 presentation',
+          },
+          {
+            title: 'Simulation of the Spread of an Epidemic',
+            context: 'Modeling of Physical-Chemical Processes in Biology \u00b7 Jan 2021',
+            text: 'Starting from COVID-19, my slides build up the SIR model of an epidemic: the maths behind it, its rates of change, and the starting conditions under which an epidemic breaks out.',
+            slides: slidesOf('epidemic'),
+            alt: 'Slides from the epidemic simulation presentation',
+          },
         ],
       },
       {
         heading: 'Lab book cover',
-        body: ['TODO: two lines on the cover you designed for your lab notebook, long before you learned to code.'],
-        features: [
-          // TODO: a photograph of the cover.
-          { title: 'The cover', text: 'TODO', media: { alt: 'the cover I designed for my lab notebook' } },
+        body: [],
+        decks: [
+          {
+            title: 'A cover for my laboratory notebook',
+            context: 'DUTH \u00b7 2020 - 2021',
+            text: 'I designed it during my time as a laboratory research trainee, then printed it and wrapped it around my own physical laboratory notebook: over 160 handwritten pages of DNA cloning experiments. These experiments inspired every visual element: gel electrophoresis results, bacterial cultures, cloning vectors and DNA polymerase structures. The frame on the right shows a DNA double helix with a polymerase passing through it, a nod to the replication and cloning work at the heart of the notebook.',
+            notes: [
+              '**Fun fact:** it was made entirely in PowerPoint, even the sizing adjustments so that the printed cover would fit the notebook exactly.',
+            ],
+            slides: [labBookCover],
+            alt: 'The cover I designed for my laboratory notebook, with its matching side frame',
+            ratio: '1284 / 858',
+          },
         ],
       },
     ],

@@ -7,9 +7,9 @@ export const accent = {
   biology: { frame: 'border-[#a78bfa]/30', text: 'text-[#a78bfa]', button: 'border-[#a78bfa]/50 text-[#c4b1ff] hover:border-[#a78bfa] hover:shadow-[0_0_30px_-8px_rgba(167,139,250,0.6)]', bar: 'border-[#a78bfa]/60', heading: '!text-[#a78bfa]' },
 }
 
-// A small subset of Markdown for body text: **bold**, _italic_, ==bold in the accent colour== and [text](url). Formats can be nested
+// A small subset of Markdown for body text: **bold**, _italic_, ==bold in the accent colour==, ++underlined++ and [text](url). Formats can be nested
 // (e.g. a link inside italics). Underscores inside words (like so_long) are left alone.
-const inlinePattern = /\*\*(.+?)\*\*|(?<![\w])_(.+?)_(?![\w])|\[([^\]]+)\]\(([^)\s]+)\)|==(.+?)==/g
+const inlinePattern = /\*\*(.+?)\*\*|(?<![\w])_(.+?)_(?![\w])|\[([^\]]+)\]\(([^)\s]+)\)|==(.+?)==|\+\+(.+?)\+\+/g
 
 export function inline(text: string, a: (typeof accent)[World]): ReactNode[] {
   const out: ReactNode[] = []
@@ -20,6 +20,7 @@ export function inline(text: string, a: (typeof accent)[World]): ReactNode[] {
     if (m[1] !== undefined) out.push(<strong key={i} className="font-semibold text-text">{inline(m[1], a)}</strong>)
     else if (m[2] !== undefined) out.push(<em key={i}>{inline(m[2], a)}</em>)
     else if (m[5] !== undefined) out.push(<strong key={i} className={`font-semibold ${a.text}`}>{inline(m[5], a)}</strong>)
+    else if (m[6] !== undefined) out.push(<u key={i} className="underline-offset-2">{inline(m[6], a)}</u>)
     else out.push(<a key={i} href={m[4]} target="_blank" rel="noreferrer" className={`${a.text} underline-offset-4 hover:underline`}>{m[3]}</a>)
     last = i + m[0].length
   }

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import Page from '../components/Page'
 import MediaView from '../components/MediaView'
 import PageStack from '../components/PageStack'
+import Slideshow from '../components/Slideshow'
 import NotFound from './NotFound'
 import { pagesByWorld, worlds, type Section, type World } from '../content'
 import { accent, inline } from '../richText'
@@ -31,8 +32,8 @@ export default function Detail({ world }: { world: World }) {
       {/* Wide screens: text on the left, hero video on the right. Phones: the video stacks under the buttons. */}
       {/* Half and half for a video; 60/40 for a page stack, which is portrait and needs less width. */}
       <div className={page.heroPages ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
-        : page.hero ? 'mt-4 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-4'}>
-        <div>
+        : page.hero ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-10'}>
+        <div className="self-start">
           {/* The gradient sits on an inline span so descenders are not cut, as on the hub pages. */}
           {page.kicker && <p className="label mb-4">{page.kicker}</p>}
           <h1 className="text-5xl sm:text-6xl font-semibold leading-[1.1] tracking-[-0.04em]">
@@ -45,7 +46,16 @@ export default function Detail({ world }: { world: World }) {
               {page.grade && <p>Grade: <span className="text-text/80">{page.grade}</span></p>}
             </div>
           )}
-          <p className="mt-4 text-lg text-muted max-w-2xl text-pretty">{page.summary}</p>
+          {/* Pages without a hero use the full width for the summary; pages with one keep it narrower beside the hero. */}
+          <p className={`mt-4 text-lg text-muted text-pretty ${page.hero || page.heroPages ? 'max-w-2xl' : ''}`}>{page.summary}</p>
+          {/* Notes about the content, each with its own bar, in the same style as the thesis page's official title. */}
+          {page.notes && (
+            <ul className="mt-5 space-y-3 text-sm text-muted">
+              {page.notes.map((n) => (
+                <li key={n} className={`border-l-2 pl-3 text-pretty ${a.bar}`}>{inline(n, a)}</li>
+              ))}
+            </ul>
+          )}
           <ul className="mt-5 flex flex-wrap gap-2">
             {page.meta.map((m) => <li key={m} className="rounded-full border border-line px-3 py-1 text-sm text-muted">{m}</li>)}
           </ul>
@@ -124,6 +134,30 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
               </li>
             ))}
           </ol>
+        </div>
+      )}
+
+      {/* Presentations: the slideshow at 70% on the left, its title and description beside it.
+          On phones the description comes first, then the slides. */}
+      {s.decks && (
+        <div className={`${s.body.length > 0 ? 'mt-12' : 'mt-8'} space-y-16`}>
+          {s.decks.map((d) => (
+            <div key={d.title} className="grid items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-10">
+              <div className="order-2 lg:order-1">
+                <Slideshow slides={d.slides} alt={d.alt} ratio={d.ratio} accentText={a.text} />
+              </div>
+              <div className="order-1 lg:order-2 lg:pt-6">
+                <p className="label mb-3 !text-xs">{d.context}</p>
+                <h3 className="text-xl font-semibold text-text text-balance">{d.title}</h3>
+                <p className="mt-2 text-muted leading-relaxed text-pretty">{inline(d.text, a)}</p>
+                {d.notes && (
+                  <ul className="mt-5 space-y-3 text-sm text-muted">
+                    {d.notes.map((n) => <li key={n} className={`border-l-2 pl-3 text-pretty ${a.bar}`}>{inline(n, a)}</li>)}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
