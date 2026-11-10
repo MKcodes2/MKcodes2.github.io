@@ -33,7 +33,7 @@ export default function Card({ to, title, text, eyebrow, large, roomy, accent, i
       )}
       <div>
         {eyebrow && <p className="label mb-3">{eyebrow}</p>}
-        <h3 className={`font-bold tracking-tight ${large ? 'text-3xl sm:text-4xl' : 'text-xl'}`}>{title}</h3>
+        <h3 className={`font-bold tracking-tight ${large ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>{title}</h3>
         <p className="mt-3 text-muted">{text}</p>
         {/* Same colour as the card's border (purple or cyan); gradient when there is no accent. */}
         <span className={`mt-6 inline-block text-base font-medium ${accent === 'biology' ? 'text-[#a78bfa]' : accent === 'coding' ? 'text-[#7cc8f5]' : 'gradient-text'}`}>Explore →</span>

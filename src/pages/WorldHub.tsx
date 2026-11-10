@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Page from '../components/Page'
 import Card from '../components/Card'
 import { biologyHub, codingHub, pagesByWorld, worlds, type World } from '../content'
@@ -22,7 +23,9 @@ export default function WorldHub({ world }: { world: World }) {
   return (
     <Page>
       <div className="pt-16" />
-      <p className="label">{w.period}</p>
+      {/* Same back link and gap as on the project pages. */}
+      <Link to="/" className="text-sm text-muted hover:text-text">← Home</Link>
+      <p className="label mt-10">{w.period}</p>
       {world === 'coding' ? (
         <>
           <HubTitle world={world} />
