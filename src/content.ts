@@ -27,6 +27,19 @@ import snaresProteinsStart from './assets/presentations/snares-video/proteins-st
 import snaresFusionVideo from './assets/presentations/snares-video/fusion.mp4'
 import snaresFusionStart from './assets/presentations/snares-video/fusion-start.webp'
 import logo42 from './assets/logos/42white.webp'
+import rtOverview from './assets/minirt/overview.webp'
+import rtFile from './assets/minirt/rt-file.webp'
+import rtKeys from './assets/minirt/keys-memo.webp'
+import rtCameraVideo from './assets/minirt/camera.mp4'
+import rtCameraPoster from './assets/minirt/camera-poster.webp'
+import rtLightVideo from './assets/minirt/light.mp4'
+import rtLightPoster from './assets/minirt/light-poster.webp'
+import rtObjectsVideo from './assets/minirt/objects.mp4'
+import rtObjectsPoster from './assets/minirt/objects-poster.webp'
+import rtStarsVideo from './assets/minirt/stars.mp4'
+import rtStarsPoster from './assets/minirt/stars-poster.webp'
+import rtColouredLight from './assets/minirt/colored-light.webp'
+import rtSpecular from './assets/minirt/specular.webp'
 import logoNsrf from './assets/logos/eu-nsrf.webp'
 import logoHarvard from './assets/logos/harvard.webp'
 import logoHms from './assets/logos/hms.webp'
@@ -71,6 +84,7 @@ export interface Section {
   features?: { title: string; text: string; media: Media }[] // tiles with a recording each
   points?: { title: string; text: string }[] // short titled paragraphs, e.g. design decisions
   pointsHeading?: string // optional sub-heading shown above the points
+  pointsTop?: boolean // beside a media: points packed at the top (one line down) instead of spread over the media's height
   pointsStyle?: 'list' // show the points as a list with ‣ markers instead of side bars
   media?: Media // a recording shown at 60% width, with the points numbered beside it
   decks?: Deck[] // presentations, each a slideshow with a short description beside it
@@ -100,6 +114,7 @@ export interface DetailPage {
   notes?: string[] // short notes under the summary, as a bulleted side note
   featured?: boolean // full case study vs shorter page
   hero?: Media // large recording under the title
+  heroArt?: { src: string; alt: string } // a ready-made picture (frame included, transparent background), centred in the right column
   heroFrame?: string // optional device image (transparent screen) the hero plays inside
   heroPages?: string[] // page images shown as a stack, turning one after another (instead of a hero video)
   heroHref?: string // optional link the hero opens when clicked
@@ -273,6 +288,9 @@ export const codingHub = {
     { rank: 6, projects: [
       { name: 'ft_transcendence', details: 'Team project: build and manage a full-stack web game platform from scratch (PongJam).', hours: 245 },
     ] },
+    { rank: 7, label: 'Mastery', projects: [
+      { name: 'computorv1', details: 'Parse and solve polynomial equations of degree 2 or lower, showing the reduced form, the degree and real or complex solutions in Python.', hours: 49 },
+    ] },
   ],
 }
 
@@ -336,6 +354,7 @@ export const pages: DetailPage[] = [
     world: 'coding',
     title: 'PongJam',
     summary: 'A realtime multiplayer Pong platform, built from scratch by a team of five as our graduation project at 42. I designed the UI and built it into the frontend: the neon arcade look, the icon-based navbar and the layout of every page.',
+    category: 'TypeScript, Tailwind CSS, UX/UI',
     meta: ['Frontend development', 'UX/UI design', 'TypeScript', 'TailwindCSS', 'HTML', 'Docker', 'README', 'Documentation'],
     featured: true,
     hero: { video: pjSignupVideo, poster: pjSignupPoster, alt: 'Screen recording of signing up for PongJam' },
@@ -393,6 +412,7 @@ export const pages: DetailPage[] = [
       {
         heading: 'Decisions and why',
         body: [],
+        pointsStyle: 'list',
         points: [
           {
             title: 'Icons instead of a crowded navbar',
@@ -416,20 +436,106 @@ export const pages: DetailPage[] = [
     slug: 'minirt',
     world: 'coding',
     title: 'miniRT',
-    summary: 'A ray tracer in C. I wrote the scene parser and designed the dual-mode experience.',
-    meta: ['Team of 2', 'C'],
+    summary: 'A ray tracer in C, built by a team of two, that turns a plain text scene file into a rendered image. I wrote the parser that reads every scene and designed the dual mode: full HD render VS interactive mode.',
+    category: 'C, Parsing, UX',
+    meta: ['C', 'Parser', 'Dual-mode design', 'User experience', 'MLX42', 'README', 'Documentation'],
     featured: true,
+    heroArt: { src: rtOverview, alt: 'A monitor showing a .rt scene file on the left and the snowman image miniRT renders from it on the right' },
     sections: [
-      { heading: 'The problem', body: ['TODO'] },
-      { heading: 'My role', body: ['TODO'] },
-      { heading: 'Decisions and why', body: ['TODO: HD vs interactive mode, the README diagrams.'] },
-      { heading: 'What I would improve', body: ['TODO'] },
+      {
+        heading: 'Project description',
+        body: [
+          '_The goal of this project is to generate images using the **Raytracing protocol**. Those computer-generated images each represent a scene, as seen from a specific angle and position, defined by simple geometric objects, and each with its own lighting system._',
+          'In simpler words: a **.rt file**, full of numbers that follow strict rules, describes a scene: the camera, the light, and objects such as spheres, planes, cylinders and cones. miniRT reads that file and renders the image it describes, using the **MLX42** graphics library.',
+          'Beyond the mandatory part (planes, spheres and cylinders, ambient and diffuse light, hard shadows), we added **cones**, **coloured light**, **specular reflection**, **soft shadows**, **live movement** of the camera, light and objects, and a starry background.',
+        ],
+      },
+      {
+        heading: 'My role',
+        body: ['miniRT was a team project of two. My teammate, wrote the vector math of the ray tracing engine. I wrote the entire ==parser== in C: it reads the .rt scene file, checks every value and serves the engine all the data structures it needs. I designed the ==dual mode== and the **user experience** of running the program: the two launch modes, the instructions in the terminal and the key guide for the interactive mode. I also authored the project [README ↗](https://github.com/MKcodes2/miniRT#readme), with its diagrams and recordings.'],
+      },
+      {
+        heading: 'The scene file',
+        body: ['Every scene starts as a .rt text file. The parser reads it line by line, in any order, and builds the scene for the ray tracing engine.'],
+        pointsTop: true,
+        media: { image: rtFile, alt: 'Diagram of the .rt scene file format, explaining every value of each element' },
+        points: [
+          { title: 'Three elements, exactly once', text: 'Ambient light (A), camera (C) and light (L) must each appear once in every scene.' },
+          { title: 'Objects in any number', text: 'Planes, spheres, cylinders and cones, in any combination and any order.' },
+          { title: 'Strict rules for every value', text: 'Colours from 0 to 255, ratios from 0 to 1, a field of view from 0 to 180 degrees, vectors from -1 to 1. The parser checks each one.' },
+          { title: 'A clear message for every mistake', text: 'A missing camera, a duplicate light, a wrong identifier or file extension: each case stops the program with its own error message.' },
+        ],
+      },
+      {
+        heading: 'What you can do',
+        body: [],
+        features: [
+          {
+            title: 'Move the camera',
+            text: 'Move and rotate the camera live, as if walking around the scene.',
+            media: { video: rtCameraVideo, poster: rtCameraPoster, alt: 'Recording of the camera moving around an ice cream scene' },
+          },
+          {
+            title: 'Move the light',
+            text: 'Move the light and watch the shading and the shadows follow it.',
+            media: { video: rtLightVideo, poster: rtLightPoster, alt: 'Recording of the light moving across a scene' },
+          },
+          {
+            title: 'Move the objects',
+            text: 'Move or rotate one object at a time, or all of them at once.',
+            media: { video: rtObjectsVideo, poster: rtObjectsPoster, alt: 'Recording of objects moving and rotating in a scene' },
+          },
+          {
+            title: 'Coloured light',
+            text: 'The light has its own RGB colour, which tints the whole scene.',
+            media: { image: rtColouredLight, alt: 'The same scene rendered with pink, yellow, purple and green light' },
+          },
+          {
+            title: 'Specular reflection',
+            text: 'Smooth surfaces reflect the light like a mirror, with a sharp highlight.',
+            media: { image: rtSpecular, alt: 'Specular highlights on a sphere and a half sphere, marked with arrows' },
+          },
+          {
+            title: 'A starry background',
+            text: 'Where no plane closes the scene, random stars replace the empty black.',
+            media: { video: rtStarsVideo, poster: rtStarsPoster, alt: 'A rocket rendered in front of twinkling random stars' },
+          },
+        ],
+      },
+      {
+        heading: 'Moving the scene',
+        body: ['In the interactive mode, you hold one element key and press one movement key.'],
+        pointsTop: true,
+        media: { image: rtKeys, alt: 'Keyboard diagrams: the element keys on the left, the rotation and translation keys on the right' },
+        points: [
+          { title: 'Choose what to move', text: 'C for the camera, L for the light, O for all objects, or 1 to 9 for a single object, in the order of the scene file.' },
+          { title: 'Choose how to move it', text: 'The arrow keys, + and - move it along the x, y and z axes; A, D, W, S, E and Z rotate it.' },
+        ],
+      },
+      {
+        heading: 'Decisions and why',
+        body: [],
+        pointsStyle: 'list',
+        points: [
+          {
+            title: 'Two modes instead of one',
+            text: 'The subject asked for a single static image. But moving the scene live was so much more fun that I wanted to keep it, and live movement needs a light, fast render. So the program runs in two modes, chosen by its arguments: with **HD** after the scene file, it opens a 1920×1080 window with soft shadows; without it, an 800×600 interactive window with hard shadows, where everything can move.',
+          },
+          {
+            title: 'Instructions in the terminal',
+            text: 'When the interactive mode starts, the terminal prints which keys move what, so nobody has to open the README to start playing.',
+          },
+          {
+            title: 'A README anyone can follow',
+            text: 'I documented the project with diagrams of the .rt format and the keys, and recordings of every feature, so anyone can write and explore their own scenes.',
+          },
+        ],
+      },
     ],
-    links: [{ label: 'GitHub', href: '#' }], // TODO: link to the MKcodes2 fork
+    links: [{ label: 'View on GitHub', href: 'https://github.com/MKcodes2/miniRT' }],
   },
-  { slug: 'minishell', world: 'coding', title: 'minishell', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
-  { slug: 'so_long', world: 'coding', title: 'so_long', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
-  { slug: 'push_swap', world: 'coding', title: 'push_swap', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
+  { slug: 'minishell', world: 'coding', title: 'minishell', category: 'C, Bash, Env', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
+  { slug: 'so_long', world: 'coding', title: 'so_long', category: 'C, 2D game', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
   // ---------- Biology ----------
   {
     slug: 'thesis',

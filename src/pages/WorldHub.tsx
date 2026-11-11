@@ -41,7 +41,7 @@ export default function WorldHub({ world }: { world: World }) {
         <BiologyIntro />
       )}
 
-      <h2 className="label !text-base !text-text mt-20 mb-6">{world === 'coding' ? 'Projects' : 'Selected Work'}</h2>
+      <h2 className="label !text-base !text-text mt-20 mb-6">{world === 'coding' ? 'Selected Projects' : 'Selected Work'}</h2>
       <div className="grid gap-6 pb-24 sm:grid-cols-2">
         {featured.map((p) => (
           <Card key={p.slug} to={`${w.path}/${p.slug}`} title={p.title} text={p.summary} eyebrow={p.category ?? p.meta[0]} accent={world} roomy />
@@ -117,7 +117,7 @@ function CodingIntro() {
       {/* Full project list, hidden until the visitor opens it. */}
       <details className="group mt-12 rounded-2xl border border-[#7cc8f5]/30 bg-surface backdrop-blur-sm transition-colors duration-300 hover:border-[#7cc8f5]/55 hover:bg-white/[0.04]">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#7cc8f5] [&::-webkit-details-marker]:hidden">
-          <span className="sweep-coding font-medium">See the full list of core curriculum projects</span>
+          <span className="sweep-coding font-medium">See the full list of the 42 projects I completed</span>
           <span aria-hidden className="text-xl transition-transform duration-300 group-hover:-translate-x-1 group-open:rotate-45">+</span>
         </summary>
         <div className="overflow-x-auto px-5 pb-5">
@@ -132,7 +132,7 @@ function CodingIntro() {
             {codingHub.curriculum.map((r) => (
               <tbody key={r.rank}>
                 <tr>
-                  <td colSpan={3} className="pt-5 pb-2 font-mono text-xs uppercase tracking-[0.2em] text-[#7cc8f5]">Rank {r.rank}</td>
+                  <td colSpan={3} className="pt-5 pb-2 font-mono text-xs uppercase tracking-[0.2em] text-[#7cc8f5]">{'label' in r ? r.label : `Rank ${r.rank}`}</td>
                 </tr>
                 {r.projects.map((p) => (
                   <tr key={p.name} className="border-b border-line/60 align-top">

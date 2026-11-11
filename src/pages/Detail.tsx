@@ -32,7 +32,7 @@ export default function Detail({ world }: { world: World }) {
       {/* Wide screens: text on the left, hero video on the right. Phones: the video stacks under the buttons. */}
       {/* Half and half for a video; 60/40 for a page stack, which is portrait and needs less width. */}
       <div className={page.heroPages ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
-        : page.hero ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-10'}>
+        : page.hero || page.heroArt ? 'mt-10 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]' : 'mt-10'}>
         <div className="self-start">
           {/* The gradient sits on an inline span so descenders are not cut, as on the hub pages. */}
           {page.kicker && <p className="label mb-4">{page.kicker}</p>}
@@ -47,7 +47,7 @@ export default function Detail({ world }: { world: World }) {
             </div>
           )}
           {/* Pages without a hero use the full width for the summary; pages with one keep it narrower beside the hero. */}
-          <p className={`mt-4 text-lg text-muted text-pretty ${page.hero || page.heroPages ? 'max-w-2xl' : ''}`}>{page.summary}</p>
+          <p className={`mt-4 text-lg text-muted text-pretty ${page.hero || page.heroArt || page.heroPages ? 'max-w-2xl' : ''}`}>{page.summary}</p>
           {/* Notes about the content, each with its own bar, in the same style as the thesis page's official title. */}
           {page.notes && (
             <ul className="mt-5 space-y-3 text-sm text-muted">
@@ -73,12 +73,16 @@ export default function Detail({ world }: { world: World }) {
 
         {/* The hero recording, shown inside a computer frame when the page has one. */}
         {page.hero && page.heroFrame && (
-          <div className="relative mx-auto w-full max-w-lg lg:mr-0" style={{ aspectRatio: '1798 / 1176' }}>
+          <div className="relative mx-auto w-full max-w-lg" style={{ aspectRatio: '1798 / 1176' }}>
             <div className="absolute overflow-hidden bg-black" style={screen}>
               <MediaView media={page.hero} className="h-full object-fill" />
             </div>
             <img src={page.heroFrame} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full" />
           </div>
+        )}
+        {/* A ready-made picture with its own frame, centred in the space beside the text. */}
+        {page.heroArt && (
+          <img src={page.heroArt.src} alt={page.heroArt.alt} className="mx-auto w-full max-w-lg select-none" draggable={false} />
         )}
         {page.hero && !page.heroFrame && (
           <div className={`overflow-hidden rounded-2xl border ${a.frame}`}>
@@ -101,7 +105,7 @@ export default function Detail({ world }: { world: World }) {
       {next !== page && (
         <Link to={`${base}/${next.slug}`} className="mt-20 mb-24 block border-t border-line pt-6 group">
           <span className="text-sm text-muted">Next</span>
-          <span className="block text-2xl font-semibold group-hover:text-lavender">{next.title} →</span>
+          <span className={`block text-2xl font-semibold ${page.world === 'coding' ? 'group-hover:text-[#7cc8f5]' : 'group-hover:text-lavender'}`}>{next.title} →</span>
         </Link>
       )}
       {next === page && <div className="pb-24" />}
@@ -122,11 +126,11 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
       {/* A recording with the steps numbered beside it: 60/40 on wide screens, the steps under the video on phones.
           The steps column is as tall as the video; the steps spread out to fill it. */}
       {s.media && s.points && (
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-10">
+        <div className={`mt-8 grid gap-8 lg:gap-10 ${s.pointsTop ? 'lg:grid-cols-[minmax(0,67fr)_minmax(0,33fr)]' : 'lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'}`}>
           <div className="soft-edges self-start">
             <MediaView media={s.media} />
           </div>
-          <ol className="flex flex-col justify-between gap-3">
+          <ol className={s.pointsTop ? 'flex flex-col gap-6 lg:pt-6' : 'flex flex-col justify-between gap-3'}>
             {s.points.map((p, i) => (
               <li key={p.title}>
                 <h3 className="font-semibold text-text"><span className={`mr-2 font-mono ${a.text}`}>{i + 1}.</span>{p.title}</h3>
