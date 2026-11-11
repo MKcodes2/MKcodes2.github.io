@@ -54,12 +54,8 @@ export default function Navbar() {
 
         <div className="hidden xl:flex items-center justify-self-end gap-3 whitespace-nowrap">
           <a href={contact.cv} download
-            className="brand-button rounded-full px-5 py-2.5 text-sm font-medium text-white shadow-[0_0_24px_rgba(106,124,246,0.45)] hover:brightness-110">
-            Download CV ↓
-          </a>
-          <a href={`mailto:${contact.email}`}
             className="outline-button rounded-full px-5 py-2.5 text-sm font-medium">
-            Let’s Talk ↗
+            Download Resume ↓
           </a>
         </div>
 
@@ -79,8 +75,7 @@ export default function Navbar() {
           >
             {items.map((i) => renderItem(i, () => setOpen(false)))}
             <div className="flex gap-3 pt-2">
-              <a href={contact.cv} download className="brand-button rounded-full px-4 py-2 text-sm text-white">Download CV ↓</a>
-              <a href={`mailto:${contact.email}`} className="outline-button rounded-full px-4 py-2 text-sm">Let’s Talk ↗</a>
+              <a href={contact.cv} download className="outline-button rounded-full px-4 py-2 text-sm">Download Resume ↓</a>
             </div>
           </motion.nav>
         )}

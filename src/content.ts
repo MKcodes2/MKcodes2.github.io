@@ -534,8 +534,9 @@ export const pages: DetailPage[] = [
     ],
     links: [{ label: 'View on GitHub', href: 'https://github.com/MKcodes2/miniRT' }],
   },
-  { slug: 'minishell', world: 'coding', title: 'minishell', category: 'C, Bash, Env', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
-  { slug: 'so_long', world: 'coding', title: 'so_long', category: 'C, 2D game', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
+  // Hidden until their pages are ready: uncomment a line to put that project live (card, page and Next link).
+  // { slug: 'minishell', world: 'coding', title: 'minishell', category: 'C, Bash, Env', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
+  // { slug: 'so_long', world: 'coding', title: 'so_long', category: 'C, 2D game', summary: 'TODO: one line.', meta: ['C'], sections: [{ heading: 'About', body: ['TODO'] }], links: [{ label: 'GitHub', href: '#' }] },
   // ---------- Biology ----------
   {
     slug: 'thesis',
