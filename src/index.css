@@ -48,14 +48,14 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
 /* The two worlds in the slogan. The span wraps over two lines; "slice" makes the gradient
    run continuously across both lines, as if they were one long line. */
 .worlds-gradient {
-  background: linear-gradient(90deg, #f5f2ff 0%, #c9b6ff 16%, #a78bfa 32%, #9d8ffa 44%, #8fa8ff 58%, #84c0f6 78%, #7cd3f2 100%);
+  background: linear-gradient(90deg, #f5f2ff 0%, #c9b6ff 16%, #a78bfa 32%, #9d8ffa 44%, #8fa8ff 58%, #84c0f6 78%, #7cc8f5 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-box-decoration-break: slice; box-decoration-break: slice;
 }
 /* Hub page titles: white fading into the colour of that world (cyan for software, purple for biology).
    Used on an inline span, like the home slogan, so letters such as g are not cut at the bottom. */
 .hub-gradient-coding {
-  background: linear-gradient(90deg, #ffffff 0%, #e6f6fe 30%, #a6dcfa 65%, #7cd3f2 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #e6f6fe 30%, #a6dcfa 65%, #7cc8f5 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-box-decoration-break: slice; box-decoration-break: slice;
 }

@@ -197,18 +197,43 @@ export const leadership: { title: string; text: string }[] = [
 // curriculum: the core curriculum from the 42 transcript, shown in the expandable table.
 // Exams are left out because they have no description or workload.
 export const codingHub = {
-  intro: [
-    '42 has no classes and no teachers. Its curriculum is project-based and peer-to-peer: students “learn to learn” by building projects together and taking ideas from each other.',
-    'I joined 42 Heilbronn on a full scholarship in March 2023.',
+  facts: [
+    '42 Graduate, part of a worldwide network of 50+ campuses and 9,000+ alumni',
+    'Project-based curriculum & Peer-to-peer learning',
+    '25 coding projects completed',
   ],
-  ranking: 'In 2026, the World University Rankings for Innovation (WURI) named 42 the 3rd most innovative educational institution in the world.',
+  networkLink: 'https://www.42network.org', // the arrow after the first fact
+  // Short notes about 42 itself, shown with a side bar under the facts.
+  about: [
+    '42 is a non-profit network of tuition-free IT schools, founded in Paris in 2013 and now in more than 30 countries. In 2026, it was named the ==world’s 3rd most innovative educational institution==.',
+    'No teachers, no classes, and campuses open 24/7. Students learn by building projects together: they search, experiment, explain their ideas to each other and take turns helping and being helped.',
+  ],
+  // My own paragraph, full width under the facts and the certificate.
+  intro: [
+    'I joined 42 Heilbronn on a full scholarship in March 2023, and it was ==one of the hardest and best experiences of my life==! It taught me to code, but above all it taught me how to learn. A few months in, having only just started with C, we were asked to build our own bash shell in C. Before 42 I would have called that impossible. The 42 motto, “_ask your peer on the left, ask your peer on the right, Google is your friend_”, really works: with supportive peers, what looks impossible becomes doable. I left 42 believing I can build what I set my mind to, with a strong **C and C++ foundation** that makes new programming languages easy to learn.',
+  ],
   certificate: {
     heading: 'Core curriculum, completed',
     text: 'In September 2026 I completed the core curriculum and received 42’s certificate “Curriculum of Architect in Digital Technologies”, at Junior Developer level.',
     pdf: 'https://drive.google.com/file/d/1BWljwkQD3v05ia4kNPe_8_6_ULGgZ3iH/view', // official certificate (PDF on Google Drive), opens in a new tab
     link: '', // TODO: the Credly badge URL
   },
-  holyGraph: 'The Holy Graph is 42’s map of the core curriculum. Every project I completed is lit up in blue.',
+  // Pills under my paragraph, like the lab techniques on the Molecular Biology hub.
+  skills: {
+    heading: 'Languages & tools',
+    items: [
+      'C', 'C++', 'Python', 'TypeScript', 'HTML & CSS', 'Tailwind CSS', 'Git', 'Docker', 'Linux & Unix',
+      'Makefiles', 'Memory management', 'Processes & pipes', 'Threads & mutexes', 'Algorithms & data structures',
+      'Object-oriented programming', 'STL & templates', 'Networking (TCP/IP)', 'UX/UI design',
+    ],
+  },
+  coursework: {
+    heading: 'Coursework',
+    text: [
+      'The core curriculum is a ==gamified system of ranks==, from 0 to 6. Each rank is one circle on the Holy Graph, with harder projects than the last, and it only opens once the rank before it is complete: every new student starts with a single project, and each finished circle unlocks the next. This keeps the learning structured rather than scattered, as **every project builds on the knowledge of the circle before it**. Along the way came **five 3-hour exams**, coded completely blind, without even code completion, so every line had to be understood. The projects I completed are lit up in blue.',
+      'It started with **Libft**, rebuilding parts of the C standard library, then moved through file handling, Unix processes and pipes, sorting algorithms, a first 2D game and concurrency with threads, all in C, to the first big team projects, **minishell** and **miniRT**. The second half brought **C++**, from object-oriented basics to templates and the STL, an HTTP server (**webserv**) and Docker infrastructure (**Inception**), and it ended with **ft_transcendence**, a full-stack web platform built by a team of five: ==PongJam==.',
+    ],
+  },
   curriculum: [
     { rank: 0, projects: [
       { name: 'Libft', details: 'Reimplementation of key C standard library functions and custom utilities.', hours: 70 },
