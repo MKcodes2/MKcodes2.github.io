@@ -214,7 +214,7 @@ export const leadership: { title: string; text: string }[] = [
 export const codingHub = {
   facts: [
     '42 Graduate, part of a worldwide network of 50+ campuses and 9,000+ alumni',
-    'Project-based curriculum & Peer-to-peer learning',
+    'Project-based curriculum & peer-to-peer learning',
     '25 coding projects completed',
   ],
   networkLink: 'https://www.42network.org', // the arrow after the first fact
