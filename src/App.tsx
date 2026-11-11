@@ -1,4 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
@@ -8,9 +9,16 @@ import NotFound from './pages/NotFound'
 
 export default function App() {
   const location = useLocation()
+  const latest = useRef(location)
+  latest.current = location
+  // Go to the top only once the old page has faded out, so its top never flashes on screen.
+  // Links to a home section (About, Honours…) skip this: Home jumps straight to the section.
+  const toTop = () => {
+    if (!(latest.current.state as { section?: string } | null)?.section) window.scrollTo(0, 0)
+  }
   return (
     <Layout>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" onExitComplete={toTop}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/coding" element={<WorldHub world="coding" />} />

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, type ReactNode } from 'react'
+import { useLayoutEffect, type ReactNode } from 'react'
 import { useLocation } from 'react-router-dom'
 import Card from '../components/Card'
 import GlowDivider from '../components/GlowDivider'
@@ -69,10 +69,11 @@ export default function Home() {
   const goTo = useSectionNav()
   const { state } = useLocation()
 
-  // Arriving from another page via a navbar link: jump to that section.
-  useEffect(() => {
+  // Arriving from another page via a navbar link: land directly on that section, before the
+  // page is painted, so the hero never shows first.
+  useLayoutEffect(() => {
     const id = (state as { section?: string } | null)?.section
-    if (id) setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }), 50)
+    if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' })
   }, [state])
 
   return (
