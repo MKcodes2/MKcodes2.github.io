@@ -196,7 +196,7 @@ export const timeline: { dates: string; title: string; text: string; tag: string
 export const honours: { title: string; year: string; text: string; image?: string; imageStyle?: 'logo' | 'soft' | 'bare' }[] = [
   { title: '42 Heilbronn scholarship', year: '2023', text: '18-month full scholarship: 140 hours a month on site and a faster project pace than the standard curriculum.', image: logo42 },
   { title: 'NSRF scholarship', year: '2020', text: 'One of 40 students across DUTH selected on academic merit and social criteria for financial support.', image: logoNsrf },
-  { title: 'Panhellenic Examinations, Physics', year: '2018', text: 'Scored 100/100 in Physics in the national university entrance exams, in the top 0.11% nationally.', image: logoPanhellenics },
+  { title: 'Panhellenic Examinations, Physics', year: '2018', text: 'Scored 100/100 in Physics in the national university entrance exams, in the top 0.1% nationally.', image: logoPanhellenics },
   { title: 'Harvard University, High School Summer Program', year: '2017', text: 'Three intensive weeks with Harvard’s Center for Hellenic Studies: philosophy, social and political science, and an EU summit simulation.', image: logoHarvard },
   { title: 'Euroscola, European Parliament', year: '2016', text: 'Selected as my region’s representative for a plenary simulation in English, debating EU policy with students from across the EU.', image: logoEuroscola },
   { title: 'Thalis Mathematics Competition', year: '2015', text: 'Award in the 74th Panhellenic Mathematics Competition “Thalis” of the Hellenic Mathematical Society.', image: logoHms, imageStyle: 'bare' },
