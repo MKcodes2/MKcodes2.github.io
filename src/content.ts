@@ -124,9 +124,9 @@ export interface DetailPage {
 
 export const contact = {
   email: 'marykate.evan@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/mary-kate-evangelidou-881518393/',
+  linkedin: 'https://www.linkedin.com/in/mary-kate-evangelidou/',
   github: 'https://github.com/MKcodes2',
-  cv: '/cv.pdf', // put the CV file at public/cv.pdf
+  cv: '/Mary-Kate-Evangelidou-CV.pdf', // CV file at public/Mary-Kate-Evangelidou-CV.pdf (also the downloaded file name)
 }
 
 export const profile = {
@@ -173,7 +173,7 @@ export const timeline: { dates: string; title: string; text: string; tag: string
   {
     dates: 'Sep 2018 — Jul 2023',
     title: 'BSc Molecular Biology & Genetics · Democritus University of Thrace',
-    text: 'A 240 ECTS Bachelor of Science combining theoretical foundations with extensive laboratory training, from genetics, biochemistry and genomics to bioinformatics and Molecular Neuroscience. Graduated with Distinction (9.22/10, top 3 of my class), and earned a Teaching Certification in Biosciences alongside the degree.',
+    text: 'A 240 ECTS Bachelor of Science combining theoretical foundations with extensive laboratory training, from genetics, biochemistry and genomics to bioinformatics and Molecular Neuroscience. Graduated with a final grade of 9.22/10 ("Excellent", top band 8.5–10), and earned a Teaching Certification in Biosciences alongside the degree.',
     tag: 'Molecular biology',
     logo: 'duth',
     sub: [
@@ -297,8 +297,8 @@ export const codingHub = {
 export const biologyHub = {
   facts: [
     'BSc Molecular Biology & Genetics, 240 ECTS',
-    'Final grade 9.22 / 10 ("Excellent"), top 3 of the cohort',
-    'Thesis graded 10 / 10',
+    'Final grade 9.22/10 ("Excellent", top band 8.5–10), ranked 3rd in my year',
+    'Thesis grade: 10/10',
   ],
   intro: [
     'My degree at DUTH combined extensive laboratory training with courses from genetics, biochemistry and genomics to bioinformatics and Molecular Neuroscience. Alongside it, I trained for two years in DNA cloning and spent my final year as an undergraduate researcher at BRFAA in Athens.',
@@ -313,7 +313,7 @@ export const biologyHub = {
     heading: 'Coursework',
     // **bold**, _italic_ (course titles) and ==purple== as on the detail pages.
     intro: 'The degree started from the **STEM fundamentals**, such as _Physics_, _Inorganic_, _Organic_ and _Physical Chemistry_ and _Biostatistics_, then moved into the core of the field: _Biochemistry_, _Genetics_, _Cellular_ and _Molecular Biology_, with **hands-on laboratory courses** throughout. Later years added _Genomics_, _Proteomics_, _Bioinformatics_ and _Systems Biology_, up to **advanced courses** such as _Molecular Neurobiology_, _Developmental Biology_ and _Molecular Immunology_. The full list of courses is below.',
-    teaching: 'The degree also included a ==Certificate of Pedagogical and Teaching Competence==, from eight courses including _Pedagogics_, _Counseling & Educational Psychology_, _Organizational Psychology_, _Adult Education_ and _Teaching Methodology_, with two teaching practicums: microteaching and a school placement.',
+    teaching: 'The degree also included a ==Certificate of Pedagogical and Teaching Competence==, from eight courses including _Pedagogics_, _Counseling & Educational Psychology_, _Organizational Psychology_, _Adult Education_ and _Teaching Methodology_, plus a microteaching practicum.',
     // Course titles and ECTS as on the official English transcript. Regular courses in the order
     // they were completed; the two certificate groups at the end.
     groups: [
