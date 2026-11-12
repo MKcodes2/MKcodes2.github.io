@@ -91,9 +91,9 @@ export default function Home() {
               here (not taken from content.ts) because the gradient needs its own <span>;
               profile.slogan is still used for screen readers via aria-label. */}
           <h1 aria-label={profile.slogan} className="text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
-            Designing systems, across <span className="worlds-gradient">science and software</span>
+            Designing systems across <span className="worlds-gradient">science and software</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">{profile.intro}</p>
+          <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-muted">{profile.intro}</p>
         </div>
         <div className="mt-10 flex flex-wrap gap-4 lg:col-start-1 lg:row-start-3">
           <button type="button" onClick={() => goTo('worlds')}

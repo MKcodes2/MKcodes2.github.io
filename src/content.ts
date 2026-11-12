@@ -133,9 +133,9 @@ export const profile = {
   name: 'Mary Kate Evangelidou',
   short: 'MK',
   role: 'Molecular Biologist · Software Developer',
-  slogan: 'Designing systems, across science and software',
+  slogan: 'Designing systems across science and software',
   intro:
-    'I’m Mary Kate, or just MK, a molecular biologist and software developer. I love neuroscience, developmental and behavioural biology, and I’d like to bring coding into that research.',
+    'I’m Mary Kate, or just MK. A molecular biologist and software developer, but above all a curious mind. I want to research how genes shape the brain, development and behaviour, and can also bring coding to that research.',
     // 'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
 }
 
