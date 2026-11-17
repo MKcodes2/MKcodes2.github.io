@@ -1,5 +1,5 @@
 // All site text lives here, so copy can be edited without touching components.
-// Anything marked TODO is waiting for Mary Kate's own words or details.
+// Anything marked TODO is waiting for my input later...
 
 import pjSignupVideo from './assets/pongjam/registration.mp4'
 import thesisPage1 from './assets/molecularBiology/thesis-page-1.webp'
@@ -428,7 +428,7 @@ export const pages: DetailPage[] = [
           },
         ],
       },
-      // TODO: 'What I would improve', in Mary Kate's words.
+      // TODO: 'What I would improve' etc if i find the time to add later.
     ],
     links: [{ label: 'View on GitHub', href: 'https://github.com/MKcodes2/PongJam' }],
   },

@@ -4,7 +4,7 @@ import scientist from '../assets/hero/scientist.webp';
 import programmer from '../assets/hero/programmer.webp';
 
 // The two "modes" of the hero portrait. The face sits in the same spot in both images,
-// so a slow crossfade makes it look like only the world around her changes.
+// so a slow crossfade makes it look like only the world around me changes.
 const MODES = [
   { src: scientist, alt: 'Sketch of Mary Kate in a lab coat, holding a pipette', glow: '167, 139, 250' }, // purple = biology
   { src: programmer, alt: 'Sketch of Mary Kate coding on a laptop', glow: '124, 200, 245' },              // cyan = software
@@ -31,7 +31,7 @@ export default function HeroPortrait() {
     <div
       className="relative mx-auto aspect-[696/694] w-full max-w-md lg:absolute lg:inset-y-0 lg:right-[max(0px,calc((100cqw_-_100cqh*696/694)/2))] lg:w-auto lg:max-w-none"
     >
-      {/* Soft glow behind her, purple in the lab and cyan at the laptop. */}
+      {/* Soft glow behind me, purple in the lab and cyan at the laptop. */}
       <motion.div
         aria-hidden
         className="absolute inset-[8%] rounded-full blur-3xl"
