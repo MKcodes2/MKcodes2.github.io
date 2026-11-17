@@ -27,8 +27,9 @@ export default function HeroPortrait() {
 
   return (
     // Phones: full width. Large screens: as tall as the hero text block, width follows the image shape.
+    // Horizontally it is centred in the right column; if it is wider than the column, it sticks to the right edge.
     <div
-      className="relative mx-auto aspect-[696/694] w-full max-w-md lg:absolute lg:inset-y-0 lg:-right-8 xl:-right-16 lg:w-auto lg:max-w-none"
+      className="relative mx-auto aspect-[696/694] w-full max-w-md lg:absolute lg:inset-y-0 lg:right-[max(0px,calc((100cqw_-_100cqh*696/694)/2))] lg:w-auto lg:max-w-none"
     >
       {/* Soft glow behind her, purple in the lab and cyan at the laptop. */}
       <motion.div

@@ -82,18 +82,21 @@ export default function Home() {
       {/* The hero fills exactly one screen (minus the navbar), so the next section always
           starts below the fold, at any zoom level. On large screens the portrait spans
           from the role label down to the buttons. */}
-      <section className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center pt-10 pb-24">
+      <section className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center pt-14 pb-24">
       <div className="grid gap-x-12 lg:grid-cols-[1.3fr_1fr]">
-        <p className="label lg:col-start-1">{profile.role}</p>
-        <div className="mt-6 lg:col-start-1 lg:row-start-2">
+        {/* Nudged a few px right: optical alignment, so the small letters look level with the big "A" below. */}
+        <p className="label pl-[3px] lg:col-start-1 lg:pl-[5px]">{profile.role}</p>
+        <div className="relative z-10 mt-6 lg:mt-9 lg:col-start-1 lg:row-start-2">
           {/* One continuous gradient over "science and software": white into purple (biology),
               shifting at "and", into blue-cyan (code) on "software". The visible text is written
               here (not taken from content.ts) because the gradient needs its own <span>;
               profile.slogan is still used for screen readers via aria-label. */}
-          <h1 aria-label={profile.slogan} className="text-5xl sm:text-7xl xl:text-8xl font-semibold leading-[0.95] tracking-[-0.045em] text-white">
-            Designing systems across <span className="worlds-gradient">science and software</span>
+          <h1 aria-label={profile.slogan} className="text-5xl sm:text-7xl xl:text-[5.85rem] font-semibold leading-[0.95] lg:leading-[1.03] tracking-[-0.045em] text-white">
+            {/* On large screens "Asking questions" stays on one line and may reach into the
+                portrait's empty top-left corner; z-10 above keeps the text on top of the portrait. */}
+            <span className="lg:whitespace-nowrap">Asking questions</span><br className="hidden lg:inline" /> across <span className="worlds-gradient">science and software</span>
           </h1>
-          <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-muted">{profile.intro}</p>
+          <p className="mt-8 lg:mt-6 max-w-xl text-[17px] leading-relaxed text-muted">{profile.intro}</p>
         </div>
         <div className="mt-10 flex flex-wrap gap-4 lg:col-start-1 lg:row-start-3">
           <button type="button" onClick={() => goTo('worlds')}
@@ -105,7 +108,7 @@ export default function Home() {
             About me
           </button>
         </div>
-        <div className="relative mt-12 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:mt-0">
+        <div className="relative mt-12 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:mt-0 lg:[container-type:size]">
           <HeroPortrait />
         </div>
       </div>
