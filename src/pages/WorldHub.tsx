@@ -7,9 +7,7 @@ import certificateDark from '../assets/school42/credly.webp'
 import certificateBright from '../assets/school42/credly-bright.webp'
 import holyGraphImg from '../assets/school42/holy-graph.webp'
 import MediaView from '../components/MediaView'
-// For now the slideshow stops at slide 25 (slides 26-30 are not public yet).
-// To show all 30 slides again, switch back to showcase.mp4.
-import showcaseVideo from '../assets/molecularBiology/showcase-slides-1-25.mp4'
+import showcaseVideo from '../assets/molecularBiology/showcase.mp4'
 import showcasePoster from '../assets/molecularBiology/showcase-poster.webp'
 import laptopFrame from '../assets/molecularBiology/laptop-frame.webp'
 
