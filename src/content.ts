@@ -135,8 +135,8 @@ export const profile = {
   role: 'Molecular Biologist · Software Developer',
   slogan: 'Asking questions across science and software',
   intro:
-    'I’m Mary Kate, or just MK. A molecular biologist and software developer, but above all a curious mind. I want to research how genes shape the brain, development and behaviour, and can also bring coding to that research.',
-    // 'I’m Mary Kate, or just MK, a Molecular Biologist and Software Developer who’s passionate about neuroscience, developmental & behavioural biology, coding & UX/UI design.',
+    'I’m Mary Kate, or just MK. A molecular biologist and software developer, but above all a curious mind. I want to research how gene regulation shapes cell identity and behaviour, from development and the brain to tissues and disease.',
+    // 'I’m Mary Kate, or just MK. A molecular biologist and software developer, but above all a curious mind. I want to research how genes shape the brain, development and behaviour, and can also bring coding to that research.',
 }
 
 // period: shown on the hub pages. highlights: shown on the home cards, says what is inside the hub.
