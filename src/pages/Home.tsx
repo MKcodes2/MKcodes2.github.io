@@ -126,10 +126,10 @@ export default function Home() {
           ))}
         </div>
         {/* The bridge between the two worlds: biology words in purple, computing words in cyan.
-            The two equivalents (proteins = software) are highlighted so the analogy reads at a glance. */}
+            The two equivalents (DNA & proteins = software) are highlighted so the analogy reads at a glance. */}
         <Reveal delay={0.2}>
-          <p className="mx-auto mt-14 max-w-2xl text-center text-lg sm:text-xl leading-relaxed text-muted">
-            <span className="rounded-md bg-[#a78bfa]/15 px-1.5 font-semibold text-[#c4b1ff]">Proteins</span> are to the <span className="text-[#a78bfa]">body</span> what{' '}
+          <p className="mx-auto mt-14 max-w-3xl text-center text-lg sm:text-xl leading-relaxed text-muted">
+            <span className="rounded-md bg-[#a78bfa]/15 px-1.5 font-semibold text-[#c4b1ff]">DNA &amp; proteins</span> are to the <span className="text-[#a78bfa]">body</span> what{' '}
             <span className="rounded-md bg-[#7cc8f5]/15 px-1.5 font-semibold text-[#a6dcfa]">software</span> is to <span className="text-[#7cc8f5]">hardware</span>.
             <br className="hidden sm:block" /> I like working at that level, in both worlds.
           </p>
