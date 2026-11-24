@@ -1,4 +1,3 @@
-import { type CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Page from '../components/Page'
 import MediaView from '../components/MediaView'
@@ -198,22 +197,16 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
           ))}
         </ul>
       )}
-      {/* Next steps: full-width see-through panels, each with the same soft 1px gradient border.
-          Kept deliberately quiet, so they do not read as pressable cards. */}
+      {/* Next steps as a plain numbered list: quieter than the findings above, which are the main point. */}
       {!s.media && s.points && s.pointsStyle === 'steps' && (
-        <ol className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} flex flex-col gap-5`}>
+        <ol className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} space-y-6`}>
           {s.points.map((p, i) => (
-            <li
-              key={p.title}
-              className="step-card rounded-2xl p-6 lg:p-7"
-              style={{
-                '--step-fill': `rgba(${a.fillRgb}, 0.05)`,
-                '--step-from': `rgba(${a.rgb}, 0.35)`,
-                '--step-to': `rgba(${a.rgb}, 0.12)`,
-              } as CSSProperties}
-            >
-              <h3 className="font-semibold text-text"><span className={`mr-2 font-mono ${a.text}`}>{i + 1}.</span>{p.title}</h3>
-              <p className="mt-2 text-muted leading-relaxed text-pretty">{inline(p.text, a)}</p>
+            <li key={p.title} className="flex gap-3">
+              <span aria-hidden className={`shrink-0 font-mono leading-6 ${a.text}`}>{i + 1}.</span>
+              <div>
+                <h3 className="font-semibold text-text leading-6">{p.title}</h3>
+                <p className="mt-1.5 text-muted leading-relaxed text-pretty">{inline(p.text, a)}</p>
+              </div>
             </li>
           ))}
         </ol>
