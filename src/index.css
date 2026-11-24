@@ -165,3 +165,14 @@ section[id], footer[id] { scroll-margin-top: 6rem; }
 @keyframes slide-fade { from { opacity: 0; } to { opacity: 1; } }
 .slideshow:fullscreen { aspect-ratio: auto !important; border-radius: 0; }
 @media (prefers-reduced-motion: reduce) { .slide-fade { animation: none; } }
+
+/* Next-step cards: see-through, with a 1px gradient border (the mask cuts the middle out of
+   a gradient-filled box). They stack full width, one per step. */
+.step-card { position: relative; background: var(--step-fill); }
+.step-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: linear-gradient(135deg, var(--step-from), var(--step-to));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}

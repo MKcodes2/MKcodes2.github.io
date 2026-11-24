@@ -1,3 +1,4 @@
+import { type CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Page from '../components/Page'
 import MediaView from '../components/MediaView'
@@ -197,7 +198,27 @@ function SectionView({ s, a }: { s: Section; a: (typeof accent)[World] }) {
           ))}
         </ul>
       )}
-      {!s.media && s.points && s.pointsStyle !== 'list' && (
+      {/* Next steps: full-width see-through panels, each with the same soft 1px gradient border.
+          Kept deliberately quiet, so they do not read as pressable cards. */}
+      {!s.media && s.points && s.pointsStyle === 'steps' && (
+        <ol className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} flex flex-col gap-5`}>
+          {s.points.map((p, i) => (
+            <li
+              key={p.title}
+              className="step-card rounded-2xl p-6 lg:p-7"
+              style={{
+                '--step-fill': `rgba(${a.fillRgb}, 0.05)`,
+                '--step-from': `rgba(${a.rgb}, 0.35)`,
+                '--step-to': `rgba(${a.rgb}, 0.12)`,
+              } as CSSProperties}
+            >
+              <h3 className="font-semibold text-text"><span className={`mr-2 font-mono ${a.text}`}>{i + 1}.</span>{p.title}</h3>
+              <p className="mt-2 text-muted leading-relaxed text-pretty">{inline(p.text, a)}</p>
+            </li>
+          ))}
+        </ol>
+      )}
+      {!s.media && s.points && s.pointsStyle !== 'list' && s.pointsStyle !== 'steps' && (
         <div className={`${s.pointsHeading ? 'mt-6' : 'mt-8'} space-y-8`}>
           {s.points.map((p) => (
             <div key={p.title} className={`border-l-2 pl-4 ${a.bar}`}>

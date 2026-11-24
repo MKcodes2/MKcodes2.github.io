@@ -85,7 +85,7 @@ export interface Section {
   points?: { title: string; text: string }[] // short titled paragraphs, e.g. design decisions
   pointsHeading?: string // optional sub-heading shown above the points
   pointsTop?: boolean // beside a media: points packed at the top (one line down) instead of spread over the media's height
-  pointsStyle?: 'list' // show the points as a list with ‣ markers instead of side bars
+  pointsStyle?: 'list' | 'steps' // 'list': ‣ markers instead of side bars; 'steps': numbered cards with a gradient border, stepping right in priority order
   media?: Media // a recording shown at 60% width, with the points numbered beside it
   decks?: Deck[] // presentations, each a slideshow with a short description beside it
 }
@@ -542,7 +542,7 @@ export const pages: DetailPage[] = [
     slug: 'thesis',
     world: 'biology',
     title: 'Gene regulatory networks in cancer cells',
-    summary: 'My BSc thesis: does the transcription factor Prox1, which may act as a tumour suppressor in breast cancer, also affect the genes that repair DNA? I overexpressed Prox1 in two breast cancer cell lines and measured 15 repair genes with real-time PCR.',
+    summary: 'My BSc thesis: does the transcription factor Prox1, which may act as a tumour suppressor in breast cancer, also affect the genes that repair DNA? I overexpressed Prox1 in two breast cancer cell lines and measured 15 DNA repair and checkpoint genes with real-time PCR.',
     category: 'Undergraduate research',
     kicker: 'BRFAA, Athens \u00b7 Mar 2022 - Feb 2023',
     officialTitle: 'Study of Gene Regulatory Networks Affecting Metabolism and DNA Repair in Cancer Cells',
@@ -564,7 +564,7 @@ export const pages: DetailPage[] = [
         body: [],
         media: { video: thesisWorkflowVideo, poster: thesisWorkflowPoster, alt: 'Animated summary of the workflow, from choosing the genes to the real-time PCR results' },
         points: [
-          { title: 'Choosing the genes', text: 'From the lab\u2019s earlier RNA-seq of mouse Neuro2A cells overexpressing Prox1, I selected 13 DNA-repair genes whose expression changed most, added two further genes of interest (_SMARCA1_ and _SMAD3_), and designed real-time PCR primers for all 15.' },
+          { title: 'Choosing the genes', text: 'From the lab\u2019s earlier RNA-seq of mouse Neuro2A cells overexpressing Prox1, I selected 13 DNA repair and checkpoint genes whose expression changed at least two-fold, added two genes of interest (_SMARCA1_ and _SMAD3_), and designed real-time PCR primers for all 15.' },
           { title: 'Cell culture', text: 'I cultured MCF7 and MDA-MB-231 cells, including thawing, splitting and cryopreservation, and HEK cells to prepare the adenovirus.' },
           { title: 'Overexpressing Prox1', text: 'A three-day infection with an adenovirus carrying either Prox1 or GFP as the control, checked under a fluorescence microscope before I went on.' },
           { title: 'Measuring the genes', text: 'RNA extraction, cDNA synthesis and real-time PCR for all 15 genes, three biological replicates per cell line, analysed with the \u0394\u0394Cq method.' },
@@ -579,14 +579,21 @@ export const pages: DetailPage[] = [
         points: [
           { title: 'Repair is not a simple story', text: 'Efficient DNA repair keeps the genome stable and is generally thought to protect against cancer. In some contexts, though, it can also help tumour cells survive treatment. LIG4, which rose the most, and WEE1 are two examples: high levels of both have been linked to harder-to-treat breast cancer.' },
           { title: 'Signs of a dual role', text: 'The literature already describes Prox1 as tumour-suppressing in some settings and tumour-promoting in others. My results add new detail to this **dual role** rather than settling it.' },
-          { title: 'The receptor may matter', text: 'Breast cancer is very heterogeneous, and Prox1 interacts with oestrogen-receptor signalling. This could explain why ATM and PRKDC dropped only in the ER-positive MCF7 cells and not in the triple-negative MDA-MB-231.' },
-          { title: 'A promising, open question', text: 'A firm link between Prox1 and DNA repair cannot be drawn yet. Prox1 remains a potentially valuable prognostic marker, and understanding how it works could help improve breast cancer treatment.' },
+          { title: 'Context changes the answer', text: 'ATM and PRKDC fell only in the oestrogen-receptor-positive MCF7 cells. Prox1 interacts with oestrogen-receptor signalling, but my two cell lines also differ in p53 status, and ATM acts directly upstream of p53, so the receptor is one candidate explanation among several rather than a conclusion. Comparing the two lines with the original mouse screen points the same way: XPA, LIG4, PIN4 and ATM moved in the same direction in all of them, while WEE1 and PRKDC moved in opposite directions. Part of the Prox1 response appears to be conserved, and part of it inverts with cellular context.' },
+          { title: 'A promising, open question', text: 'A firm link between Prox1 and DNA repair cannot be drawn from expression data alone. What it does show is that Prox1 affects genes that maintain the genome, and that it affects them differently in different cellular contexts.' },
         ],
       },
       {
         heading: 'What I would do next',
         body: [
-          'DNA-repair assays would measure damage and repair directly, instead of inferring them from expression. Co-immunoprecipitation would show whether Prox1 physically interacts with repair proteins. Above all, breast cancer is heterogeneous, so any of this needs several more cell lines before it means much.',
+          'My results show that Prox1 changes the expression of DNA repair, checkpoint and stress genes. They cannot yet show whether repair itself changes, or whether Prox1 acts on these genes directly. These are the steps I would take, in order of priority.',
+        ],
+        pointsStyle: 'steps',
+        points: [
+          { title: 'Reduce Prox1, not only raise it', text: 'Overexpression on its own cannot separate a genuine regulatory effect from the effect of high, non-physiological protein levels. Lowering Prox1 with siRNA or CRISPR should move the same genes in the opposite direction. This is the strongest single test, and the clearest gap in my data.' },
+          { title: 'Separate direct from indirect regulation', text: 'ChIP-qPCR, or CUT&RUN where cell numbers are limiting, at the regulatory regions of the genes that responded in both cell lines, together with a search for Prox1 binding motifs there. Genes bound in both lines would form the context-independent core of the response.' },
+          { title: 'Change one variable at a time', text: 'My two cell lines differ in oestrogen-receptor status, but also in p53 status, driver mutations and differentiation state. The decisive experiments isolate each one: removing or blocking the oestrogen receptor in MCF7 and repeating the overexpression, and comparing a p53 wild-type and a p53-null line that are otherwise identical. That is more informative than simply adding cell lines.' },
+          { title: 'Measure repair instead of inferring it', text: 'Protein levels and activity do not follow mRNA, and ATM and DNA-PKcs are controlled mainly by phosphorylation. Protein blots, \u03b3H2AX foci or a comet assay for double-strand break repair, and a UV-sensitivity assay for nucleotide excision repair would test directly what the expression data only suggests. Each changed gene also predicts a drug sensitivity worth testing, such as a WEE1 inhibitor where WEE1 rises, or platinum where ERCC1 rises.' },
         ],
       },
     ],
